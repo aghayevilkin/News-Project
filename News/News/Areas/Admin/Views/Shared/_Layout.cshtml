@@ -1,0 +1,380 @@
+﻿@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<IdentityUser> SignInManager
+@inject RoleManager<IdentityRole> RoleManager
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Admin Panel</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="~/areas/admin/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/areas/admin/vendors/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="~/areas/admin/vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="~/areas/admin/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <link rel="stylesheet" href="~/areas/admin/vendors/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/areas/admin/vendors/jquery-bar-rating/fontawesome-stars.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="~/areas/admin/css/style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="~/areas/admin/css/sweetalert2.min.css" rel="stylesheet" />
+    <!-- endinject -->
+    <link rel="shortcut icon" href="~/areas/admin/images/favicon.png" />
+    <script src="https://kit.fontawesome.com/d58faeafe2.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container-scroller">
+        <!-- partial:partials/_navbar.html -->
+        <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+            <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
+                <a class="navbar-brand brand-logo" asp-controller="home" asp-action="index"><img src="~/areas/admin/images/logo_black.png" alt="logo" /></a>
+                <a class="navbar-brand brand-logo-mini" asp-controller="home" asp-action="index"><img src="~/areas/admin/images/logo-mini.svg" alt="logo" /></a>
+            </div>
+            <div class="navbar-menu-wrapper d-flex align-items-center">
+                <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                    <span class="icon-menu"></span>
+                </button>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown d-none d-lg-flex">
+                        <a class="nav-link dropdown-toggle nav-btn" id="actionDropdown" href="#" data-toggle="dropdown">
+                            <span class="btn">+ Create new</span>
+                        </a>
+                        <div class="dropdown-menu navbar-dropdown dropdown-left" aria-labelledby="actionDropdown">
+                            <a class="dropdown-item" href="#">
+                                <i class="icon-user text-primary"></i>
+                                User Account
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">
+                                <i class="icon-user-following text-warning"></i>
+                                Admin User
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">
+                                <i class="icon-docs text-success"></i>
+                                Sales report
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="navbar-nav navbar-nav-right">
+                </ul>
+                <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+                    <span class="icon-menu"></span>
+                </button>
+            </div>
+        </nav>
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+            <div class="row row-offcanvas row-offcanvas-right">
+                <!-- partial:partials/_settings-panel.html -->
+                <div class="theme-setting-wrapper">
+                    <div id="settings-trigger"><i class="mdi mdi-settings"></i></div>
+                    <div id="theme-settings" class="settings-panel">
+                        <i class="settings-close mdi mdi-close"></i>
+                        <p class="settings-heading">SIDEBAR SKINS</p>
+                        <div class="sidebar-bg-options selected" id="sidebar-light-theme"><div class="img-ss rounded-circle bg-light border mr-3"></div>Light</div>
+                        <div class="sidebar-bg-options" id="sidebar-dark-theme"><div class="img-ss rounded-circle bg-dark border mr-3"></div>Dark</div>
+                        <p class="settings-heading mt-2">HEADER SKINS</p>
+                        <div class="color-tiles mx-0 px-4">
+                            <div class="tiles primary"></div>
+                            <div class="tiles success"></div>
+                            <div class="tiles warning"></div>
+                            <div class="tiles danger"></div>
+                            <div class="tiles pink"></div>
+                            <div class="tiles info"></div>
+                            <div class="tiles dark"></div>
+                            <div class="tiles default"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- partial -->
+                <!-- partial:partials/_sidebar.html -->
+                <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                    <ul class="nav">
+                        <li class="nav-item nav-profile">
+                            <div class="nav-link">
+                                <div class="profile-image">
+                                    <img src="~/areas/admin/images/faces/admin.png" alt="image" />
+                                    <span class="online-status online"></span> <!--change class online to offline or busy as needed-->
+                                </div>
+                                <div class="profile-name">
+                                    <p class="name">
+                                        @*@if (SignInManager.IsSignedIn(User))
+                                        {
+                                            @UserManager.GetUserName(User)
+                                        }*@
+                                    </p>
+                                    @*@if (SignInManager.IsSignedIn(User))
+                                    {
+                                        if (User.IsInRole("Admin"))
+                                        {
+                                            <p class="designation">
+                                                Admin
+                                            </p>
+                                        }
+                                        else if (User.IsInRole("Moderator"))
+                                        {
+                                            <p class="designation">
+                                                Moderator
+                                            </p>
+                                        }
+                                    }*@
+
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#home" aria-expanded="false" aria-controls="home">
+                                <i class="fa fa-institution menu-icon"></i>
+                                <span class="menu-title">Home</span>
+                                <span class="badge badge-info">1</span>
+                            </a>
+                            <div class="collapse" id="home">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="home" asp-action="index"> Home </a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#about" aria-expanded="false" aria-controls="about">
+                                <i class="fa fa-eye menu-icon"></i>
+                                <span class="menu-title">About</span>
+                                <span class="badge badge-info">4</span>
+                            </a>
+                            <div class="collapse" id="about">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="about" asp-action="index"> About </a></li>
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="about" asp-action="CreateAchievement"> Create Achievement </a></li>
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="about" asp-action="CreateHistory"> Create History </a></li>
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="about" asp-action="CreateAboutServices"> Create AboutServices </a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#service" aria-expanded="false" aria-controls="service">
+                                <i class="fa fa-eercast menu-icon"></i>
+                                <span class="menu-title">Services</span>
+                                <span class="badge badge-primary">3</span>
+                            </a>
+                            <div class="collapse" id="service">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="service" asp-action="index"> Services </a></li>
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="service" asp-action="transporterium"> Transporterium </a></li>
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="service" asp-action="StepsforWork"> Steps for Work </a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#blog" aria-expanded="false" aria-controls="blog">
+                                <i class="fas fa-blog menu-icon"></i>
+                                <span class="menu-title">Blog</span>
+                                <span class="badge badge-info">2</span>
+                            </a>
+                            <div class="collapse" id="blog">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="blog" asp-action="index"> Blog </a></li>
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="blog" asp-action="Create"> Create Blog </a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#contact" aria-expanded="false" aria-controls="contact">
+                                <i class="fas fa-envelope-open-text menu-icon"></i>
+                                <span class="menu-title">Contact</span>
+                                <span class="badge badge-danger">1</span>
+                            </a>
+                            <div class="collapse" id="contact">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="contact" asp-action="index"> Contact</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#shipping" aria-expanded="false" aria-controls="shipping">
+                                <img src="~/img/logistics.svg" width="22" class="mr-2" alt="Request icon" />
+                                <span class="menu-title">Shipping Request</span>
+                                <span class="badge badge-success">1</span>
+                            </a>
+                            <div class="collapse" id="shipping">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="request" asp-action="index"> Request</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#request" aria-expanded="false" aria-controls="request">
+                                <i class="far fa-file-alt menu-icon"></i>
+                                <span class="menu-title">Request a Quote</span>
+                                <span class="badge badge-success">1</span>
+                            </a>
+                            <div class="collapse" id="request">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="home" asp-action="RequestQuote"> Request a Quote</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#subscribe" aria-expanded="false" aria-controls="subscribe">
+                                <i class="fas fa-bell menu-icon"></i>
+                                <span class="menu-title">Subscribers</span>
+                                <span class="badge badge-dark">1</span>
+                            </a>
+                            <div class="collapse" id="subscribe">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="contact" asp-action="subscribers"> Subscribers</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#users" aria-expanded="false" aria-controls="users">
+                                <i class="fa fa-users menu-icon"></i>
+                                <span class="menu-title">Users</span>
+                                <span class="badge badge-warning">1</span>
+                            </a>
+                            <div class="collapse" id="users">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="account" asp-action="users"> Users</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
+                                <i class="icon-user menu-icon"></i>
+                                <span class="menu-title">Roles</span>
+                                <span class="badge badge-warning">2</span>
+                            </a>
+                            <div class="collapse" id="general-pages">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="account" asp-action="roles"> Roles</a></li>
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="account" asp-action="createrole"> Create Role </a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#team" aria-expanded="false" aria-controls="team">
+                                <i class="fab fa-teamspeak menu-icon"></i>
+                                <span class="menu-title">Teams</span>
+                                <span class="badge badge-success">1</span>
+                            </a>
+                            <div class="collapse" id="team">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="team" asp-action="index"> Teams </a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#faq" aria-expanded="false" aria-controls="faq">
+                                <img src="~/img/faq.svg" class="mr-2" alt="faq icon" />
+                                <span class="menu-title">Faq</span>
+                                <span class="badge badge-success">1</span>
+                            </a>
+                            <div class="collapse" id="faq">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="faq" asp-action="index"> Faq </a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#testimonial" aria-expanded="false" aria-controls="testimonial">
+                                <i class="fas fa-quote-right menu-icon"></i>
+                                <span class="menu-title">Testimonials</span>
+                                <span class="badge badge-success">2</span>
+                            </a>
+                            <div class="collapse" id="testimonial">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="testimonial" asp-action="index"> Testimonials </a></li>
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="testimonial" asp-action="create"> Create Testimonials </a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#partner" aria-expanded="false" aria-controls="partner">
+                                <i class="fas fa-handshake menu-icon"></i>
+                                <span class="menu-title">Partners</span>
+                                <span class="badge badge-success">2</span>
+                            </a>
+                            <div class="collapse" id="partner">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="partner" asp-action="index"> Partners </a></li>
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="partner" asp-action="create"> Create Partners </a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#setting" aria-expanded="false" aria-controls="setting">
+                                <i class="fa fa-cogs menu-icon"></i>
+                                <span class="menu-title">Settings</span>
+                                <span class="badge badge-success">1</span>
+                            </a>
+                            <div class="collapse" id="setting">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="setting" asp-action="index"> Settings </a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                    </ul>
+                </nav>
+
+
+                @RenderBody()
+
+                <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+                <!-- plugins:js -->
+                <script src="~/areas/admin/vendors/js/vendor.bundle.base.js"></script>
+                <!-- endinject -->
+
+                <script src="https://cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>
+                <!-- Plugin js for this page-->
+                <script src="~/areas/admin/vendors/jquery-bar-rating/jquery.barrating.min.js"></script>
+                <script src="~/areas/admin/vendors/chart.js/Chart.min.js"></script>
+                <script src="~/areas/admin/vendors/raphael/raphael.min.js"></script>
+                <script src="~/areas/admin/vendors/morris.js/morris.min.js"></script>
+                <script src="~/areas/admin/vendors/jquery-sparkline/jquery.sparkline.min.js"></script>
+                <!-- End plugin js for this page-->
+                <!-- inject:js -->
+                <script src="~/areas/admin/js/off-canvas.js"></script>
+                <script src="~/areas/admin/js/hoverable-collapse.js"></script>
+                <script src="~/areas/admin/js/misc.js"></script>
+                <script src="~/areas/admin/js/settings.js"></script>
+                <script src="~/areas/admin/js/todolist.js"></script>
+                <!-- endinject -->
+                <!-- Custom js for this page-->
+                <script src="~/areas/admin/js/dashboard.js"></script>
+                <script src="~/js/site.js"></script>
+                <script src="~/js/main.js"></script>
+                <script src="~/areas/admin/js/script.js"></script>
+                <!-- End custom js for this page-->
+                <script src="~/plugin/sweetalert2.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+                @RenderSection("Scripts", required: false)
+                @await Html.PartialAsync("_notificationPartial")
+</body>
+
+
+</html>

@@ -1,0 +1,55 @@
+﻿@model VmProfile
+@inject UserManager<IdentityUser> UserManager
+@{
+    var userHasPassword = await UserManager.HasPasswordAsync(Model.User);
+
+}
+<div class="sidebar-widgets">
+    <div class="dashboard-navbar">
+
+        <form method="post" id="imgForm" asp-controller="account" asp-action="UpdateUserImage" enctype="multipart/form-data">
+            <div class="d-user-avater imgDiv">
+                @if (Model.User.Image != null)
+                {
+                    <label for="image"><img id="file_uploadTwo" src="~/Uploads/Images/Accounts/@Model.User.Image" class="img-fluid avater upload-img" alt="My Image"></label>
+                }
+                else
+                {
+                    <label for="image"><img id="file_upload" src="~/img/avatar1.png" class="img-fluid avater upload-img" alt="My Image"></label>
+                }
+
+                <h4>
+                    @Model.User.Name @Model.User.Surname  @if (Model.User.IsVerify != false)
+                    {
+                        <img class="verificationicon" src="~/img/verification.svg" alt="img">
+                    }
+                </h4>
+
+                <input style="display:none;" type='file' id="image" onchange="readURLTwo(this);" asp-for="User.ImageFileTwo" />
+                <button id="imgSubBtn" class="imgBtn d-none btn" type="submit">Update</button>
+            </div>
+
+        </form>
+
+        <div class="d-navigation">
+            <ul>
+                <li class="@(ViewBag.Section == "dashboard"?"active":"")"><a asp-controller="account" asp-action="index"><i class="ti-user"></i>My Profile</a></li>
+                <li class="@(ViewBag.Section == "posts"?"active":"")"><a asp-controller="account" asp-action="posts"><i class="fas fa-blog"></i>Post Listings</a></li>
+                <li class="@(ViewBag.Section == "savedblogs"?"active":"")"><a asp-controller="account" asp-action="savedblogs"><i class="ti-bookmark"></i>List of saved blogs</a></li>
+                <li class="@(ViewBag.Section == "requestquote"?"active":"")"><a asp-controller="account" asp-action="RequestQuote"><i class="far fa-file-alt"></i>List of Request a Quote</a></li>
+                <li class="@(ViewBag.Section == "requests"?"active":"")"><a asp-controller="account" asp-action="Requests"><i class="fas fa-dolly"></i>Request for list of shipping</a></li>
+                <li class="@(ViewBag.Section == "postcreate"?"active":"")"><a asp-controller="account" asp-action="postcreate"><i class="ti-pencil-alt"></i>Submit New Post</a></li>
+                @if (!userHasPassword)
+                {
+                    <li class="@(ViewBag.Section == "changepassword"?"active":"")"><a asp-controller="account" asp-action="addpassword"><i class="ti-unlock"></i>Add Password</a></li>
+                }
+                else
+                {
+                    <li class="@(ViewBag.Section == "changepassword"?"active":"")"><a asp-controller="account" asp-action="changepassword"><i class="ti-unlock"></i>Change Password</a></li>
+                }
+                <li><a asp-controller="account" asp-action="logout"><i class="ti-power-off"></i>Log Out</a></li>
+            </ul>
+        </div>
+
+    </div>
+</div>

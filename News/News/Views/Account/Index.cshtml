@@ -1,0 +1,93 @@
+﻿@model VmProfile
+@inject UserManager<IdentityUser> UserManager
+@{
+    ViewData["Title"] = "My Account";
+    ViewBag.Section = "dashboard";
+}
+
+<div class="page-title">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+
+                <h2 class="ipt-title">Welcome!</h2>
+                <span class="ipn-subtitle">Welcome To Your Account</span>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="bg-light">
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-lg-3 col-md-12">
+
+                <div class="simple-sidebar sm-sidebar" id="filter_search">
+
+                    <div class="search-sidebar_header">
+                        <h4 class="ssh_heading">Close Filter</h4>
+                        <button onclick="closeFilterSearch()" class="w3-bar-item w3-button w3-large"><i class="ti-close"></i></button>
+                    </div>
+
+                    <partial name="_DashboardNavbar" />
+
+                </div>
+            </div>
+
+            <div class="col-lg-9 col-md-12">
+
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <br />
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="dashboard-stat widget-1">
+                            <div class="dashboard-stat-content"><h4>@Model.Posts.Count</h4> <span>My News</span></div>
+                            <div class="dashboard-stat-icon"><i class="fas fa-blog"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="dashboard-stat widget-2">
+                            <div class="dashboard-stat-content"><h4>@Model.SavedNews.Count</h4> <span>Saved News</span></div>
+                            <div class="dashboard-stat-icon"><i class="ti-bookmark"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="dashboard-stat widget-6">
+                            @if (ViewBag.LastPostDate != null)
+                            {
+                                <div class="dashboard-stat-content"><h4>@ViewBag.LastPostDate.Date.ToString("dd MMMM yyyy")</h4> <span>Last News added date</span></div>
+                            }
+                            else
+                            {
+                                <div class="dashboard-stat-content"><h4>0</h4> <span>Last News added date</span></div>
+                            }
+
+                            <div class="dashboard-stat-icon"><i class="far fa-clock"></i></div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="dashboard-wraper">
+
+                    <!-- Basic Information -->
+                    <!--My Account-->
+                    <partial name="_MyAccount" />
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
