@@ -10,6 +10,7 @@ namespace News.Helpers.Mail
         public static string BaseUrl = "https://localhost:44312/";
         public static string ProjectName = "News Managements";
         public static string ConfirmPath = BaseUrl + "account/ConfirmEmail";
+        public static string ForgotPath = BaseUrl + "account/resetpassword";
         public static string MailFrom = "transxmanagement@gmail.com";
         public static string MailPasswrd = "lhieoyaivmdladfi";
     }

@@ -174,3 +174,8 @@ C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Views\Account
 C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Views\Account\ConfirmEmail.cshtml.g.cs
 C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Views\Account\_DashboardNavbar.cshtml.g.cs
 C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Views\Account\_MyAccount.cshtml.g.cs
+C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Views\Account\ForgotPassword.cshtml.g.cs
+C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Views\Account\ResetPassword.cshtml.g.cs
+C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Views\Account\AddPassword.cshtml.g.cs
+C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Views\Account\ChangePassword.cshtml.g.cs
+C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Views\Account\UpdateUser.cshtml.g.cs

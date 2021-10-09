@@ -15,6 +15,7 @@ namespace News.ViewModels
         public List<News.Models.News> News { get; set; }
         public List<Subscribe> Subscribes { get; set; }
         public CustomUser CustomUser { get; set; }
+        public Setting Setting { get; set; }
 
 
         public string ReturnUrl { get; set; }

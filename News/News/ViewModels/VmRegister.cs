@@ -17,7 +17,7 @@ namespace News.ViewModels
         public string Email { get; set; }
 
 
-        [Required(ErrorMessage = "Password is required"), MaxLength(30)]
+        [Required(ErrorMessage = "Password is required"), MaxLength(30),MinLength(6,ErrorMessage = "Password must have a minimum length of 6")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }

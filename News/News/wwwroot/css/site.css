@@ -410,6 +410,17 @@ label {
         }
 
 
+
+.button-style-one {
+    color: #fff;
+    font-size: 14px;
+    background: #00997d;
+    height: 70px;
+    line-height: 70px;
+    min-width: 210px;
+    padding: 0 30px;
+}
+
 .quote-form-submit {
     font-size: 13px;
     font-weight: 500;
@@ -422,6 +433,14 @@ label {
     border-radius: 0 0 25px 0;
     -webkit-transition: all .3s;
     transition: all .3s;
+}
+
+.imgBtn {
+    right: -12px;
+    position: absolute;
+    top: 0;
+    background: #00997D;
+    color: white;
 }
 
 /*End Account Css Code*/

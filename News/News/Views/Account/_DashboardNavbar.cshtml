@@ -34,11 +34,9 @@
         <div class="d-navigation">
             <ul>
                 <li class="@(ViewBag.Section == "dashboard"?"active":"")"><a asp-controller="account" asp-action="index"><i class="ti-user"></i>My Profile</a></li>
-                <li class="@(ViewBag.Section == "posts"?"active":"")"><a asp-controller="account" asp-action="posts"><i class="fas fa-blog"></i>Post Listings</a></li>
-                <li class="@(ViewBag.Section == "savedblogs"?"active":"")"><a asp-controller="account" asp-action="savedblogs"><i class="ti-bookmark"></i>List of saved blogs</a></li>
-                <li class="@(ViewBag.Section == "requestquote"?"active":"")"><a asp-controller="account" asp-action="RequestQuote"><i class="far fa-file-alt"></i>List of Request a Quote</a></li>
-                <li class="@(ViewBag.Section == "requests"?"active":"")"><a asp-controller="account" asp-action="Requests"><i class="fas fa-dolly"></i>Request for list of shipping</a></li>
-                <li class="@(ViewBag.Section == "postcreate"?"active":"")"><a asp-controller="account" asp-action="postcreate"><i class="ti-pencil-alt"></i>Submit New Post</a></li>
+                <li class="@(ViewBag.Section == "posts"?"active":"")"><a asp-controller="account" asp-action="posts"><i class="fas fa-blog"></i>News Listings</a></li>
+                <li class="@(ViewBag.Section == "savednews"?"active":"")"><a asp-controller="account" asp-action="savesnews"><i class="ti-bookmark"></i>List of saved news</a></li>
+                <li class="@(ViewBag.Section == "postcreate"?"active":"")"><a asp-controller="account" asp-action="postcreate"><i class="ti-pencil-alt"></i>Submit New News</a></li>
                 @if (!userHasPassword)
                 {
                     <li class="@(ViewBag.Section == "changepassword"?"active":"")"><a asp-controller="account" asp-action="addpassword"><i class="ti-unlock"></i>Add Password</a></li>

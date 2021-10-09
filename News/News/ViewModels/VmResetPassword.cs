@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace News.ViewModels
 {
-    public class VmResetPassword
+    public class VmResetPassword : VmBase
     {
         [Required]
         [EmailAddress]

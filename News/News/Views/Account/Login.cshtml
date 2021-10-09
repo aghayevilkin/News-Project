@@ -29,7 +29,7 @@
             </div>
             <span class="text text-danger" asp-validation-for="LoginViewModel.Password"></span>
         </div>
-        <div class="btn-group"><button class="btn btn--primary" type="submit">Sign in</button><a class="btn--text" href="#0">Forgot password?</a></div>
+        <div class="btn-group"><button class="btn btn--primary" type="submit">Sign in</button><a class="btn--text" asp-controller="account" asp-action="ForgotPassword">Forgot password?</a></div>
     </div>
 </form>
 

@@ -26,6 +26,7 @@ namespace News.Data
         public DbSet<TagToNews> TagToNews { get; set; }
         public DbSet<Subscribe> Subscribes { get; set; }
         public DbSet<SavedNews> SavedNews { get; set; }
+        public DbSet<Setting> Settings { get; set; }
 
     }
 }
