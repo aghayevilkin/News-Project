@@ -107,12 +107,12 @@
                                 </div>
                                 <div class="profile-name">
                                     <p class="name">
-                                        @*@if (SignInManager.IsSignedIn(User))
+                                        @if (SignInManager.IsSignedIn(User))
                                         {
                                             @UserManager.GetUserName(User)
-                                        }*@
+                                        }
                                     </p>
-                                    @*@if (SignInManager.IsSignedIn(User))
+                                    @if (SignInManager.IsSignedIn(User))
                                     {
                                         if (User.IsInRole("Admin"))
                                         {
@@ -126,7 +126,7 @@
                                                 Moderator
                                             </p>
                                         }
-                                    }*@
+                                    }
 
                                 </div>
                             </div>
@@ -140,6 +140,20 @@
                             <div class="collapse" id="home">
                                 <ul class="nav flex-column sub-menu">
                                     <li class="nav-item"> <a class="nav-link" asp-controller="home" asp-action="index"> Home </a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#news" aria-expanded="false" aria-controls="news">
+                                <i class="fas fa-blog menu-icon"></i>
+                                <span class="menu-title">News</span>
+                                <span class="badge badge-info">2</span>
+                            </a>
+                            <div class="collapse" id="news">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="news" asp-action="index"> News </a></li>
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="news" asp-action="Create"> Create News </a></li>
                                 </ul>
                             </div>
                         </li>
@@ -161,35 +175,6 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="collapse" href="#service" aria-expanded="false" aria-controls="service">
-                                <i class="fa fa-eercast menu-icon"></i>
-                                <span class="menu-title">Services</span>
-                                <span class="badge badge-primary">3</span>
-                            </a>
-                            <div class="collapse" id="service">
-                                <ul class="nav flex-column sub-menu">
-                                    <li class="nav-item"> <a class="nav-link" asp-controller="service" asp-action="index"> Services </a></li>
-                                    <li class="nav-item"> <a class="nav-link" asp-controller="service" asp-action="transporterium"> Transporterium </a></li>
-                                    <li class="nav-item"> <a class="nav-link" asp-controller="service" asp-action="StepsforWork"> Steps for Work </a></li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="collapse" href="#blog" aria-expanded="false" aria-controls="blog">
-                                <i class="fas fa-blog menu-icon"></i>
-                                <span class="menu-title">Blog</span>
-                                <span class="badge badge-info">2</span>
-                            </a>
-                            <div class="collapse" id="blog">
-                                <ul class="nav flex-column sub-menu">
-                                    <li class="nav-item"> <a class="nav-link" asp-controller="blog" asp-action="index"> Blog </a></li>
-                                    <li class="nav-item"> <a class="nav-link" asp-controller="blog" asp-action="Create"> Create Blog </a></li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="nav-item">
                             <a class="nav-link" data-toggle="collapse" href="#contact" aria-expanded="false" aria-controls="contact">
                                 <i class="fas fa-envelope-open-text menu-icon"></i>
                                 <span class="menu-title">Contact</span>
@@ -198,32 +183,6 @@
                             <div class="collapse" id="contact">
                                 <ul class="nav flex-column sub-menu">
                                     <li class="nav-item"> <a class="nav-link" asp-controller="contact" asp-action="index"> Contact</a></li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="collapse" href="#shipping" aria-expanded="false" aria-controls="shipping">
-                                <img src="~/img/logistics.svg" width="22" class="mr-2" alt="Request icon" />
-                                <span class="menu-title">Shipping Request</span>
-                                <span class="badge badge-success">1</span>
-                            </a>
-                            <div class="collapse" id="shipping">
-                                <ul class="nav flex-column sub-menu">
-                                    <li class="nav-item"> <a class="nav-link" asp-controller="request" asp-action="index"> Request</a></li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="collapse" href="#request" aria-expanded="false" aria-controls="request">
-                                <i class="far fa-file-alt menu-icon"></i>
-                                <span class="menu-title">Request a Quote</span>
-                                <span class="badge badge-success">1</span>
-                            </a>
-                            <div class="collapse" id="request">
-                                <ul class="nav flex-column sub-menu">
-                                    <li class="nav-item"> <a class="nav-link" asp-controller="home" asp-action="RequestQuote"> Request a Quote</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -268,59 +227,6 @@
                             </div>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="collapse" href="#team" aria-expanded="false" aria-controls="team">
-                                <i class="fab fa-teamspeak menu-icon"></i>
-                                <span class="menu-title">Teams</span>
-                                <span class="badge badge-success">1</span>
-                            </a>
-                            <div class="collapse" id="team">
-                                <ul class="nav flex-column sub-menu">
-                                    <li class="nav-item"> <a class="nav-link" asp-controller="team" asp-action="index"> Teams </a></li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="collapse" href="#faq" aria-expanded="false" aria-controls="faq">
-                                <img src="~/img/faq.svg" class="mr-2" alt="faq icon" />
-                                <span class="menu-title">Faq</span>
-                                <span class="badge badge-success">1</span>
-                            </a>
-                            <div class="collapse" id="faq">
-                                <ul class="nav flex-column sub-menu">
-                                    <li class="nav-item"> <a class="nav-link" asp-controller="faq" asp-action="index"> Faq </a></li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="collapse" href="#testimonial" aria-expanded="false" aria-controls="testimonial">
-                                <i class="fas fa-quote-right menu-icon"></i>
-                                <span class="menu-title">Testimonials</span>
-                                <span class="badge badge-success">2</span>
-                            </a>
-                            <div class="collapse" id="testimonial">
-                                <ul class="nav flex-column sub-menu">
-                                    <li class="nav-item"> <a class="nav-link" asp-controller="testimonial" asp-action="index"> Testimonials </a></li>
-                                    <li class="nav-item"> <a class="nav-link" asp-controller="testimonial" asp-action="create"> Create Testimonials </a></li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="collapse" href="#partner" aria-expanded="false" aria-controls="partner">
-                                <i class="fas fa-handshake menu-icon"></i>
-                                <span class="menu-title">Partners</span>
-                                <span class="badge badge-success">2</span>
-                            </a>
-                            <div class="collapse" id="partner">
-                                <ul class="nav flex-column sub-menu">
-                                    <li class="nav-item"> <a class="nav-link" asp-controller="partner" asp-action="index"> Partners </a></li>
-                                    <li class="nav-item"> <a class="nav-link" asp-controller="partner" asp-action="create"> Create Partners </a></li>
-                                </ul>
-                            </div>
-                        </li>
 
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="collapse" href="#setting" aria-expanded="false" aria-controls="setting">

@@ -242,6 +242,12 @@ namespace News.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
+                    b.Property<int?>("NewsCategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NewsStatus")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(500)
@@ -253,6 +259,8 @@ namespace News.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("NewsCategoryId");
 
                     b.HasIndex("UserId");
 
@@ -568,11 +576,15 @@ namespace News.Migrations
 
             modelBuilder.Entity("News.Models.News", b =>
                 {
-                    b.HasOne("News.Models.NewsCategory", "Category")
-                        .WithMany("News")
+                    b.HasOne("News.Models.NewsSubCategory", "Category")
+                        .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("News.Models.NewsCategory", null)
+                        .WithMany("News")
+                        .HasForeignKey("NewsCategoryId");
 
                     b.HasOne("News.Models.CustomUser", "User")
                         .WithMany()

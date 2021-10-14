@@ -1,0 +1,71 @@
+﻿@model VmNews
+@{
+    ViewData["Title"] = "Blog";
+}
+
+<div class="content-wrapper">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">News</h4>
+                <div class="mr-2 mb-2">
+                    <a asp-controller="news" asp-action="category" class="btn btn-success">Category</a>
+                    <a asp-controller="news" asp-action="subcategory" class="btn btn-danger">Sub Category </a>
+                    <a asp-controller="news" asp-action="tag" class="btn btn-inverse-primary">Tags</a>
+                </div>
+                <ul class="nav nav-tabs tab-solid  tab-solid-primary" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="tab-6-1" data-toggle="tab" href="#firstTable" role="tab" aria-controls="home-6-1" aria-selected="true"><i class="mdi mdi-home-outline"></i>News</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tab-6-2" data-toggle="tab" href="#secondTable" role="tab" aria-controls="profile-6-2" aria-selected="false"><i class="mdi mdi-account-outline"></i>Create</a>
+                    </li>
+                </ul>
+                <div class="tab-content tab-content-solid">
+                    <div class="tab-pane fade active show" id="firstTable" role="tabpanel" aria-labelledby="tab-6-1">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <partial name="ViewAll" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="secondTable" role="tabpanel" aria-labelledby="tab-6-2">
+                        <partial name="Create" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#categoryId").change(function () {
+            $("#subcategoryId").empty();
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("LoadSubCategory")',
+
+                dataType: 'json',
+
+                data: { id: $("#categoryId").val() },
+
+                success: function (subcategories) {
+                    $("#subcategoryId").append('<option value="' + 0 + '">' + "Select Sub Category" + '</option>');
+
+                    $.each(subcategories, function (i, subcategory) {
+                        $("#subcategoryId").append('<option value="' + subcategory.value + '">' + subcategory.text + '</option>');
+                    });
+                },
+                /*error: function*/
+            });
+            return false;
+        })
+    })
+
+
+    </script>
+
+}

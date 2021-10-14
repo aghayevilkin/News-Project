@@ -1,0 +1,43 @@
+﻿@model List<NewsCategory>
+@{
+    ViewData["Title"] = "Category";
+}
+
+<div class="content-wrapper">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Category</h4>
+            <div class="mr-2">
+                <a asp-controller="news" asp-action="createcategory" class="btn btn-info"><i class="mdi mdi-plus-circle-outline"></i> Add</a>
+                <a asp-controller="news" asp-action="subcategory" class="btn btn-danger"> Sub Category</a>
+                <a asp-controller="news" asp-action="index" class="btn btn-success"> News</a>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ var i = 1;}
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <th scope="row">@i</th>
+                                <td>@item.Name</td>
+                                <td>
+                                    <a asp-area="admin" asp-controller="news" asp-action="updatecategory" asp-route-id="@item.Id" class="btn btn-success">Update</a>
+                                    <a onclick="return confirm('Are you sure?')" asp-area="admin" asp-controller="news" asp-action="deletecategory" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

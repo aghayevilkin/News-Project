@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace News.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[Authorize(Roles = "Admin, Moderator")]
+    [Authorize(Roles = "Admin, Moderator")]
     public class HomeController : BaseController
     {
         public IActionResult Index()

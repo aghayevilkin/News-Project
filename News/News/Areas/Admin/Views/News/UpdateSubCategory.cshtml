@@ -1,0 +1,31 @@
+﻿@model NewsSubCategory
+@{
+    ViewData["Title"] = "Update Sub Category";
+}
+
+<div class="content-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <form asp-area="admin" asp-controller="news" asp-action="updatesubcategory" method="post">
+                    <div class="form-group">
+                        <label asp-for="Name">Sub Category Name</label>
+                        <input class="form-control" id="Name" asp-for="Name">
+                        <span id="messages" asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="categoryId">Category</label>
+                        <select id="categoryId" class="form-control" asp-for="NewsCategoryId" asp-items="@(new SelectList(ViewBag.Categories, "Id", "Name"))">
+                        </select>
+                        <span asp-validation-for="NewsCategoryId" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button asp-action="subcategory" class="btn btn-danger">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

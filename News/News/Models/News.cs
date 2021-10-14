@@ -22,10 +22,12 @@ namespace News.Models
         public string Content { get; set; }
         public DateTime AddedDate { get; set; }
 
+        public NewsStatus NewsStatus { get; set; }
+
         [Required(ErrorMessage = "Category Secmelisiniz!")]
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
-        public NewsCategory Category { get; set; }
+        public NewsSubCategory Category { get; set; }
         [NotMapped]
         public int[] TagIds { get; set; }
         public string UserId { get; set; }
