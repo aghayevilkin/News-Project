@@ -35,6 +35,6 @@ namespace News.Models
         public CustomUser User { get; set; }
         public List<NewsComment> Comments { get; set; }
         public List<TagToNews> TagToNews { get; set; }
-        public List<SavedNews> SavedBlogs { get; set; }
+        public List<SavedNews> SavedNews { get; set; }
     }
 }

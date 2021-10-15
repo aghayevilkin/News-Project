@@ -450,3 +450,43 @@ label {
 .verificationicon {
     width: 1.5rem;
 }
+
+
+.cateBlog {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    padding-top: 2%;
+}
+
+.blog-bookmarked {
+    color: #00997D;
+    cursor: pointer;
+}
+
+.when {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    max-width: 60px;
+    opacity: 0.9;
+    line-height: 1.2;
+    margin-left: 15px;
+}
+
+.when-date {
+    padding: 6px 15px;
+    background-color: #1894A0;
+}
+.when-date, .when-time {
+    color: #fff !important;
+    text-align: center;
+}
+
+.when-time {
+    padding: 5px 15px 3px;
+    background-color: #334564;
+    font-size: 14px;
+    font-weight: bold;
+}

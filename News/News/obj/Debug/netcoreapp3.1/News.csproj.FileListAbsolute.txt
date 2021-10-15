@@ -198,3 +198,4 @@ C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\V
 C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\News\SubCategory.cshtml.g.cs
 C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\News\CreateSubCategory.cshtml.g.cs
 C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\News\UpdateSubCategory.cshtml.g.cs
+C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\News.GeneratedMSBuildEditorConfig.editorconfig
