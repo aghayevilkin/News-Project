@@ -452,11 +452,13 @@ label {
 }
 
 
+
+/*News page*/
 .cateBlog {
     display: flex;
     justify-content: space-between;
     align-items: end;
-    padding-top: 2%;
+    margin: 2%;
 }
 
 .blog-bookmarked {
@@ -489,4 +491,93 @@ label {
     background-color: #334564;
     font-size: 14px;
     font-weight: bold;
+}
+
+
+.stats {
+    overflow: hidden;
+    border-top: 1px solid #aaa;
+    color: #aaaaaa;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: default;
+    margin-top: 5%;
+}
+
+.stats-i-container {
+    box-sizing: border-box;
+    float: left;
+    width: 33.3%;
+    line-height: 38px;
+    border: 0 solid #dddddd;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-right-width: 1px;
+    background-color: #f2f2f2;
+    text-align: center;
+}
+
+.news-content {
+    border: 1px solid #dddddd;
+}
+
+
+.stats-like-active:hover {
+    background: #00997D;
+    color: #fff;
+}
+.stats_dislikes:hover {
+    background: #dc0000;
+    color: #fff;
+}
+.like-hover:hover, .dislike-hover:hover {
+    color: #aaaaaa;
+    background: #F2F2F2;
+    cursor: default;
+} 
+
+
+.stats-like-active, .stats_dislikes-active {
+    cursor: pointer;
+}
+
+.news-i .stats-like-selected.stats_likes {
+    color: #008e0f;
+}
+
+.news-i .stats-like-selected.stats_dislikes {
+    color: #dc0000;
+}
+
+.like-added {
+    color: #00997D;
+    background: #F2F2F2;
+    cursor: default;
+}
+    .like-added:hover {
+        background: #F2F2F2;
+        color: #00997D;
+    }
+
+.fa-thumbs-up:before {
+    padding-right: 4px;
+}
+
+.fa-thumbs-down:before {
+    padding-right: 4px;
+}
+
+.dislike-added {
+    color: #DC0000;
+    background: #F2F2F2;
+    cursor: default;
+}
+    .dislike-added:hover {
+        background: #F2F2F2;
+        color: #DC0000;
+    }
+
+/*Layouts*/
+.main-menu > .li-home > a::after {
+    display: none;
 }

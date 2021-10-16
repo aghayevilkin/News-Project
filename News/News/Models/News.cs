@@ -36,5 +36,6 @@ namespace News.Models
         public List<NewsComment> Comments { get; set; }
         public List<TagToNews> TagToNews { get; set; }
         public List<SavedNews> SavedNews { get; set; }
+        public List<LikeAndDislike> LikeAndDislikes { get; set; }
     }
 }

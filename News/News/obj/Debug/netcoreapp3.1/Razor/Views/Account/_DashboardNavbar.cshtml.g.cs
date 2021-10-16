@@ -21,27 +21,34 @@ using News;
 #nullable disable
 #nullable restore
 #line 2 "C:\Users\ASUS\source\repos\News\News\Views\_ViewImports.cshtml"
-using News.Models;
+using News.Data;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 3 "C:\Users\ASUS\source\repos\News\News\Views\_ViewImports.cshtml"
-using News.ViewModels;
+using News.Models;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 4 "C:\Users\ASUS\source\repos\News\News\Views\_ViewImports.cshtml"
+using News.ViewModels;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "C:\Users\ASUS\source\repos\News\News\Views\_ViewImports.cshtml"
 using Microsoft.AspNetCore.Identity;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"144e594eabbf9c79c0221ab46be568432cf42c8b", @"/Views/Account/_DashboardNavbar.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"161a6f4aeb0c61b495cf5d6761ddb4e220572a81", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"099ef9e36d23f5c69976c5942300df24ac2f9f52", @"/Views/_ViewImports.cshtml")]
     public class Views_Account__DashboardNavbar : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<VmProfile>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("id", new global::Microsoft.AspNetCore.Html.HtmlString("file_uploadTwo"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -106,7 +113,7 @@ using Microsoft.AspNetCore.Identity;
 #line hidden
 #nullable disable
             WriteLiteral("<div class=\"sidebar-widgets\">\r\n    <div class=\"dashboard-navbar\">\r\n\r\n        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "144e594eabbf9c79c0221ab46be568432cf42c8b12234", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "144e594eabbf9c79c0221ab46be568432cf42c8b12395", async() => {
                 WriteLiteral("\r\n            <div class=\"d-user-avater imgDiv\">\r\n");
 #nullable restore
 #line 12 "C:\Users\ASUS\source\repos\News\News\Views\Account\_DashboardNavbar.cshtml"
@@ -117,7 +124,7 @@ using Microsoft.AspNetCore.Identity;
 #line hidden
 #nullable disable
                 WriteLiteral("                    <label for=\"image\">");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "144e594eabbf9c79c0221ab46be568432cf42c8b12844", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "144e594eabbf9c79c0221ab46be568432cf42c8b13005", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -153,7 +160,7 @@ AddHtmlAttributeValue("", 555, Model.User.Image, 555, 17, false);
 #line hidden
 #nullable disable
                 WriteLiteral("                    <label for=\"image\">");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "144e594eabbf9c79c0221ab46be568432cf42c8b14965", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "144e594eabbf9c79c0221ab46be568432cf42c8b15126", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -203,7 +210,7 @@ AddHtmlAttributeValue("", 555, Model.User.Image, 555, 17, false);
 #line hidden
 #nullable disable
                 WriteLiteral("                        ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "144e594eabbf9c79c0221ab46be568432cf42c8b17397", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "144e594eabbf9c79c0221ab46be568432cf42c8b17558", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -227,7 +234,7 @@ AddHtmlAttributeValue("", 555, Model.User.Image, 555, 17, false);
 #line hidden
 #nullable disable
                 WriteLiteral("                </h4>\r\n\r\n                ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "144e594eabbf9c79c0221ab46be568432cf42c8b18918", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "144e594eabbf9c79c0221ab46be568432cf42c8b19079", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper>();
@@ -285,7 +292,7 @@ WriteAttributeValue("", 1491, ViewBag.Section == "dashboard"?"active":"", 1491, 
 #nullable disable
             EndWriteAttribute();
             WriteLiteral(">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "144e594eabbf9c79c0221ab46be568432cf42c8b23253", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "144e594eabbf9c79c0221ab46be568432cf42c8b23414", async() => {
                 WriteLiteral("<i class=\"ti-user\"></i>My Profile");
             }
             );
@@ -313,7 +320,7 @@ WriteAttributeValue("", 1656, ViewBag.Section == "posts"?"active":"", 1656, 41, 
 #nullable disable
             EndWriteAttribute();
             WriteLiteral(">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "144e594eabbf9c79c0221ab46be568432cf42c8b25060", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "144e594eabbf9c79c0221ab46be568432cf42c8b25221", async() => {
                 WriteLiteral("<i class=\"fas fa-blog\"></i>News Listings");
             }
             );
@@ -341,7 +348,7 @@ WriteAttributeValue("", 1824, ViewBag.Section == "savednews"?"active":"", 1824, 
 #nullable disable
             EndWriteAttribute();
             WriteLiteral(">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "144e594eabbf9c79c0221ab46be568432cf42c8b26878", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "144e594eabbf9c79c0221ab46be568432cf42c8b27039", async() => {
                 WriteLiteral("<i class=\"ti-bookmark\"></i>List of saved news");
             }
             );
@@ -369,7 +376,7 @@ WriteAttributeValue("", 2005, ViewBag.Section == "postcreate"?"active":"", 2005,
 #nullable disable
             EndWriteAttribute();
             WriteLiteral(">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "144e594eabbf9c79c0221ab46be568432cf42c8b28702", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "144e594eabbf9c79c0221ab46be568432cf42c8b28863", async() => {
                 WriteLiteral("<i class=\"ti-pencil-alt\"></i>Submit New News");
             }
             );
@@ -406,7 +413,7 @@ WriteAttributeValue("", 2250, ViewBag.Section == "changepassword"?"active":"", 2
 #nullable disable
             EndWriteAttribute();
             WriteLiteral(">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "144e594eabbf9c79c0221ab46be568432cf42c8b30779", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "144e594eabbf9c79c0221ab46be568432cf42c8b30940", async() => {
                 WriteLiteral("<i class=\"ti-unlock\"></i>Add Password");
             }
             );
@@ -444,7 +451,7 @@ WriteAttributeValue("", 2494, ViewBag.Section == "changepassword"?"active":"", 2
 #nullable disable
             EndWriteAttribute();
             WriteLiteral(">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "144e594eabbf9c79c0221ab46be568432cf42c8b32850", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "144e594eabbf9c79c0221ab46be568432cf42c8b33011", async() => {
                 WriteLiteral("<i class=\"ti-unlock\"></i>Change Password");
             }
             );
@@ -470,7 +477,7 @@ WriteAttributeValue("", 2494, ViewBag.Section == "changepassword"?"active":"", 2
 #line hidden
 #nullable disable
             WriteLiteral("                <li>");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "144e594eabbf9c79c0221ab46be568432cf42c8b34483", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "144e594eabbf9c79c0221ab46be568432cf42c8b34644", async() => {
                 WriteLiteral("<i class=\"ti-power-off\"></i>Log Out");
             }
             );

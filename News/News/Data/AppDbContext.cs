@@ -27,6 +27,7 @@ namespace News.Data
         public DbSet<Subscribe> Subscribes { get; set; }
         public DbSet<SavedNews> SavedNews { get; set; }
         public DbSet<Setting> Settings { get; set; }
+        public DbSet<LikeAndDislike> LikeAndDislikes { get; set; }
 
     }
 }

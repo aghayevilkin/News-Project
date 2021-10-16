@@ -36,9 +36,10 @@ namespace News.Controllers
             ViewBag.Page = "blog";
             ViewBag.UserId = userId;
 
+            
 
             ViewBag.categoryId = id;
-            IList<News.Models.News> newss = _context.News.Include(saved => saved.SavedNews).Include(u => u.User).ThenInclude(us => us.SocialToUsers).ThenInclude(soc => soc.Social).Include(scc=>scc.Category).ThenInclude(scs=>scs.NewsCategory).Where(b => (id != null ? b.CategoryId == id : true) &&
+            IList<News.Models.News> newss = _context.News.Include(saved => saved.SavedNews).Include(lord=>lord.LikeAndDislikes).Include(u => u.User).ThenInclude(us => us.SocialToUsers).ThenInclude(soc => soc.Social).Include(scc=>scc.Category).ThenInclude(scs=>scs.NewsCategory).Where(b => (id != null ? b.CategoryId == id : true) &&
                                                                 (tagId != null ? b.TagToNews.Any(t => t.TagId == tagId) : true) &&
                                                                 (year != null ? b.AddedDate.Year == year : true) &&
                                                                 (month != null ? b.AddedDate.Month == month : true) &&
@@ -140,6 +141,171 @@ namespace News.Controllers
             return Json(200);
         }
 
+
+
+        public JsonResult addLike(int? newsId)
+        {
+            var userId = _userManager.GetUserId(User);
+            if (newsId == null)
+            {
+                return Json(404);
+            }
+
+            bool isExist = _context.LikeAndDislikes.Any(aa => aa.NewsId == newsId && aa.UserId == userId);
+            LikeAndDislike likeOrDislike = _context.LikeAndDislikes.FirstOrDefault(aa => aa.NewsId == newsId && aa.UserId == userId);
+
+            if (!isExist)
+            {
+                LikeAndDislike model = new LikeAndDislike()
+                {
+                    NewsId = (int)newsId,
+                    UserId = userId,
+                    LikeAndDislikeStatus = LikeAndDislikeStatus.Like,
+                    AddedDate = DateTime.Now,
+                };
+
+                _context.LikeAndDislikes.Add(model);
+                _context.SaveChanges();
+            }
+            else if (likeOrDislike.LikeAndDislikeStatus != LikeAndDislikeStatus.Like)
+            {
+                LikeAndDislike model = _context.LikeAndDislikes.FirstOrDefault(aa => aa.NewsId == newsId && aa.UserId == userId);
+
+                _context.LikeAndDislikes.Remove(model);
+                _context.SaveChanges();
+
+
+                LikeAndDislike model2 = new LikeAndDislike()
+                {
+                    NewsId = (int)newsId,
+                    UserId = userId,
+                    LikeAndDislikeStatus = LikeAndDislikeStatus.Like,
+                    AddedDate = DateTime.Now,
+                };
+
+                _context.LikeAndDislikes.Add(model2);
+                _context.SaveChanges();
+
+                return Json(999);
+            }
+            else
+            {
+                return Json(404);
+            }
+
+
+
+            return Json(200);
+        }
+
+
+
+
+        public JsonResult removeFromLike(int? newsId)
+        {
+            var userId = _userManager.GetUserId(User);
+            if (newsId == null)
+            {
+                return Json(404);
+            }
+
+            bool isExist = _context.LikeAndDislikes.Any(aa => aa.NewsId == newsId && aa.UserId == userId);
+
+            if (isExist)
+            {
+                LikeAndDislike model = _context.LikeAndDislikes.FirstOrDefault(aa => aa.NewsId == newsId && aa.UserId == userId);
+
+                _context.LikeAndDislikes.Remove(model);
+                _context.SaveChanges();
+            }
+            else
+            {
+                return Json(404);
+            }
+            return Json(200);
+        }
+
+
+        public JsonResult addDisLike(int? newsId)
+        {
+            var userId = _userManager.GetUserId(User);
+            if (newsId == null)
+            {
+                return Json(404);
+            }
+
+            bool isExist = _context.LikeAndDislikes.Any(aa => aa.NewsId == newsId && aa.UserId == userId);
+            LikeAndDislike likeOrDislike = _context.LikeAndDislikes.FirstOrDefault(aa => aa.NewsId == newsId && aa.UserId == userId);
+
+            if (!isExist)
+            {
+                LikeAndDislike model = new LikeAndDislike()
+                {
+                    NewsId = (int)newsId,
+                    UserId = userId,
+                    LikeAndDislikeStatus = LikeAndDislikeStatus.Dislike,
+                    AddedDate = DateTime.Now,
+                };
+
+                _context.LikeAndDislikes.Add(model);
+                _context.SaveChanges();
+            }
+            else if (likeOrDislike.LikeAndDislikeStatus!=LikeAndDislikeStatus.Dislike)
+            {
+                LikeAndDislike model = _context.LikeAndDislikes.FirstOrDefault(aa => aa.NewsId == newsId && aa.UserId == userId);
+
+                _context.LikeAndDislikes.Remove(model);
+                _context.SaveChanges();
+
+
+                LikeAndDislike model2 = new LikeAndDislike()
+                {
+                    NewsId = (int)newsId,
+                    UserId = userId,
+                    LikeAndDislikeStatus = LikeAndDislikeStatus.Dislike,
+                    AddedDate = DateTime.Now,
+                };
+
+                _context.LikeAndDislikes.Add(model2);
+                _context.SaveChanges();
+
+                return Json(999);
+            }
+            else
+            {
+                return Json(404);
+            }
+
+
+
+
+            return Json(200);
+        }
+
+
+        public JsonResult removeFromDisLike(int? newsId)
+        {
+            var userId = _userManager.GetUserId(User);
+            if (newsId == null)
+            {
+                return Json(404);
+            }
+
+            bool isExist = _context.LikeAndDislikes.Any(aa => aa.NewsId == newsId && aa.UserId == userId);
+
+            if (isExist)
+            {
+                LikeAndDislike model = _context.LikeAndDislikes.FirstOrDefault(aa => aa.NewsId == newsId && aa.UserId == userId);
+
+                _context.LikeAndDislikes.Remove(model);
+                _context.SaveChanges();
+            }
+            else
+            {
+                return Json(404);
+            }
+            return Json(200);
+        }
 
     }
 }

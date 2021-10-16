@@ -48,17 +48,6 @@
             <div class="topbar">
                 <div class="content-topbar container h-100">
                     <div class="left-topbar">
-                        <span class="left-topbar-item flex-wr-s-c">
-                            <span>
-                                New York, NY
-                            </span>
-
-                            <img class="m-b-1 m-rl-8" src="~/images/icons/icon-night.png" alt="IMG">
-
-                            <span>
-                                HI 58° LO 56°
-                            </span>
-                        </span>
 
                         <a asp-controller="about" asp-action="index" class="left-topbar-item">
                             About
@@ -129,36 +118,32 @@
             <!-- Menu Mobile -->
             <div class="menu-mobile">
                 <ul class="topbar-mobile">
-                    <li class="left-topbar">
-                        <span class="left-topbar-item flex-wr-s-c">
-                            <span>
-                                New York, NY
-                            </span>
-
-                            <img class="m-b-1 m-rl-8" src="~/images/icons/icon-night.png" alt="IMG">
-
-                            <span>
-                                HI 58° LO 56°
-                            </span>
-                        </span>
-                    </li>
 
                     <li class="left-topbar">
-                        <a href="#" class="left-topbar-item">
+                        <a asp-controller="about" asp-action="index" class="left-topbar-item">
                             About
                         </a>
 
-                        <a href="#" class="left-topbar-item">
+                        <a asp-controller="contact" asp-action="index" class="left-topbar-item">
                             Contact
                         </a>
 
-                        <a href="#" class="left-topbar-item">
-                            Sing up
-                        </a>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <a asp-controller="account" asp-action="logout" class="left-topbar-item">
+                                Logout
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-controller="account" asp-action="register" class="left-topbar-item">
+                                Sing up
+                            </a>
 
-                        <a href="#" class="left-topbar-item">
-                            Log in
-                        </a>
+                            <a asp-controller="account" asp-action="login" class="left-topbar-item">
+                                Log in
+                            </a>
+                        }
                     </li>
 
                     <li class="right-topbar">
@@ -186,20 +171,11 @@
 
                 <ul class="main-menu-m">
                     <li>
-                        <a href="index.html">Home</a>
-                        <ul class="sub-menu-m">
-                            <li><a href="index.html">Homepage v1</a></li>
-                            <li><a href="home-02.html">Homepage v2</a></li>
-                            <li><a href="home-03.html">Homepage v3</a></li>
-                        </ul>
-
-                        <span class="arrow-main-menu-m">
-                            <i class="fa fa-angle-right" aria-hidden="true"></i>
-                        </span>
+                        <a asp-controller="home" asp-action="index">Home</a>
                     </li>
 
                     <li>
-                        <a href="category-01.html">News</a>
+                        <a asp-controller="news" asp-action="index">News</a>
                     </li>
 
                     <li>
@@ -261,22 +237,17 @@
                 <div class="main-nav">
                     <!-- Menu desktop -->
                     <nav class="menu-desktop">
-                        <a class="logo-stick" href="index.html">
+                        <a class="logo-stick" asp-controller="home" asp-action="index">
                             <img src="~/images/icons/logo-01.png" alt="LOGO">
                         </a>
 
                         <ul class="main-menu">
-                            <li class="main-menu-active">
-                                <a href="index.html">Home</a>
-                                <ul class="sub-menu">
-                                    <li><a href="index.html">Homepage v1</a></li>
-                                    <li><a href="home-02.html">Homepage v2</a></li>
-                                    <li><a href="home-03.html">Homepage v3</a></li>
-                                </ul>
+                            <li class="main-menu-active li-home">
+                                <a asp-controller="home" asp-action="index">Home</a>
                             </li>
 
                             <li class="mega-menu-item">
-                                <a href="category-01.html">News</a>
+                                <a asp-controller="news" asp-action="index">News</a>
 
                                 <div class="sub-mega-menu">
                                     <div class="nav flex-column nav-pills" role="tablist">
@@ -2555,19 +2526,6 @@
         <span class="symbol-btn-back-to-top">
             <span class="fas fa-angle-up"></span>
         </span>
-    </div>
-
-    <!-- Modal Video 01-->
-    <div class="modal fade" id="modal-video-01" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document" data-dismiss="modal">
-            <div class="close-mo-video-01 trans-0-4" data-dismiss="modal" aria-label="Close">&times;</div>
-
-            <div class="wrap-video-mo-01">
-                <div class="video-mo-01">
-                    <iframe src="~/https://www.youtube.com/embed/wJnBTPUQS5A?rel=0" allowfullscreen></iframe>
-                </div>
-            </div>
-        </div>
     </div>
 
 
