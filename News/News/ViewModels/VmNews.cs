@@ -10,7 +10,7 @@ namespace News.ViewModels
     {
         public News.Models.News New { get; set; }
         public List<News.Models.News> RecentPost { get; set; }
-        public List<NewsCategory> Categories { get; set; }
+        public List<NewsSubCategory> NewsSubCategories { get; set; }
         public List<NewsComment> Comments { get; set; }
         public NewsComment Comment { get; set; }
         public List<NewsTag> Tags { get; set; }

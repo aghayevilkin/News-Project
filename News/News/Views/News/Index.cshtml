@@ -127,8 +127,6 @@
 
 
 
-
-
 <!-- Post -->
 <section class="bg0 p-t-70 p-b-55">
     <div class="container">
@@ -142,7 +140,7 @@
                             <div class="col-sm-6 p-r-25 p-r-15-sr991">
                                 <!-- Item latest -->
                                 <div class="m-b-45">
-                                    <a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
+                                    <a asp-controller="news" asp-action="details" asp-route-id="@news.Id" class="wrap-pic-w hov1 trans-03">
                                         <img style="background-size: cover; background-position: center center; height: 225px; " src="~/Uploads/Images/News/@news.Image" alt="IMG">
                                     </a>
 
@@ -173,7 +171,7 @@
 
                                         <div class="p-t-16">
                                             <h5 class="p-b-5 m-2">
-                                                <a href="blog-detail-01.html" class="f1-m-3 cl2 hov-cl10 trans-03">
+                                                <a asp-controller="news" asp-action="details" asp-route-id="@news.Id" class="f1-m-3 cl2 hov-cl10 trans-03">
                                                     @news.Title
                                                 </a>
                                             </h5>
@@ -280,24 +278,47 @@
 
             <div class="col-md-10 col-lg-4 p-b-80">
                 <div class="p-l-10 p-rl-0-sr991">
-                    <!-- Subscribe -->
-                    <div class="bg10 p-rl-35 p-t-28 p-b-35 m-b-50">
-                        <h5 class="f1-m-5 cl0 p-b-10">
-                            Subscribe
-                        </h5>
 
-                        <p class="f1-s-1 cl0 p-b-25">
-                            Get all latest content delivered to your email a few times a month.
-                        </p>
+                    <!-- Category -->
 
-                        <form class="size-a-9 pos-relative">
-                            <input class="s-full f1-m-6 cl6 plh9 p-l-20 p-r-55" type="text" name="email" placeholder="Email">
+                    <div class="p-b-60">
+                        <div class="how2 how2-cl4 flex-s-c">
+                            <h3 class="f1-m-2 cl3 tab01-title">
+                                Category
+                            </h3>
+                        </div>
 
-                            <button class="size-a-10 flex-c-c ab-t-r fs-16 cl9 hov-cl10 trans-03">
-                                <i class="fa fa-arrow-right"></i>
-                            </button>
-                        </form>
+                        <ul class="p-t-35 p-l-0">
+                            @foreach (var item in Model.Categories)
+                            {
+
+                                 <li class="p-rl-4  @(ViewBag.categoryId == item.Id?"item-active":"item-cate")">
+                                     <a asp-controller="news" asp-action="index" asp-route-id="@item.Id" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
+                                         @item.Name <span style=" position: absolute; right: 25px;"> @item.NewsSubCategories.Sum(d => d.News.Count()) </span>
+                                     </a>
+                                 
+                                     <ul style="padding-left: 10px; border-bottom: 1px solid #AAAAAA;">
+                                         @foreach (var sub in item.NewsSubCategories)
+                                         {
+                                             @if (sub.News.Count != 0)
+                                             {
+                                                 <li class="how-bor1 p-rl-5 p-tb-5" style="list-style:inside;">
+                                                     <a asp-controller="news" asp-action="index" asp-route-id="@item.Id" asp-route-cateId="@sub.Id" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
+                                                         @sub.Name   <span> (@sub.News.Count()) </span>
+                                 
+                                                     </a>
+                                                 </li>
+                                             }
+                                 
+                                         }
+                                     </ul>
+                                 
+                                 </li>
+
+                            }
+                        </ul>
                     </div>
+
 
                     <!-- Most Popular -->
                     <div class="p-b-23">
@@ -360,11 +381,23 @@
                         </ul>
                     </div>
 
-                    <!--  -->
-                    <div class="flex-c-s p-b-50">
-                        <a href="#">
-                            <img class="max-w-full" src="~/images/banner-02.jpg" alt="IMG">
-                        </a>
+                    <!-- Subscribe -->
+                    <div class="bg10 p-rl-35 p-t-28 p-b-35 m-b-50">
+                        <h5 class="f1-m-5 cl0 p-b-10">
+                            Subscribe
+                        </h5>
+
+                        <p class="f1-s-1 cl0 p-b-25">
+                            Get all latest content delivered to your email a few times a month.
+                        </p>
+
+                        <form class="size-a-9 pos-relative">
+                            <input class="s-full f1-m-6 cl6 plh9 p-l-20 p-r-55" type="text" name="email" placeholder="Email">
+
+                            <button class="size-a-10 flex-c-c ab-t-r fs-16 cl9 hov-cl10 trans-03">
+                                <i class="fa fa-arrow-right"></i>
+                            </button>
+                        </form>
                     </div>
 
                     <!-- Tag -->
@@ -409,6 +442,9 @@
                             </a>
                         </div>
                     </div>
+
+
+
                 </div>
             </div>
         </div>

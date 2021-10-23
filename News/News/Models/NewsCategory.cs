@@ -15,7 +15,7 @@ namespace News.Models
         [Required(ErrorMessage = "Category Name boş olmamalıdır!")]
         public string Name { get; set; }
 
-        public List<News> News { get; set; }
+     //   public List<News> News { get; set; }
         public List<NewsSubCategory> NewsSubCategories { get; set; }
 
     }

@@ -28,6 +28,11 @@ namespace News.Models
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         public NewsSubCategory Category { get; set; }
+
+        //[Required(ErrorMessage = "Category Secmelisiniz!")]
+        //public int NewsCategoryId { get; set; }
+        //[ForeignKey("NewsCategoryId")]
+        //public NewsCategory NewsCategory { get; set; }
         [NotMapped]
         public int[] TagIds { get; set; }
         public string UserId { get; set; }

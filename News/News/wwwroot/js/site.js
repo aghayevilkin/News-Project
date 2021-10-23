@@ -183,13 +183,25 @@
 
         });
 
-    });
 
-    
+
+        
+
+    });
 
 });
 
 
+//window.addEventListener("unload", function () {
+//    var count = parseInt(localStorage.getItem('counter') || 0);
+
+//    localStorage.setItem('counter', ++count)
+//    console.log(count);
+//}, false);
+
+//if (localStorage.getItem('counter') == 6) {
+//    alert('You refreshed page 6 times')
+//}
 
 
 function readURL(input) {

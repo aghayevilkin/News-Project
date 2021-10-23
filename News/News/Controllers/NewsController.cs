@@ -27,19 +27,19 @@ namespace News.Controllers
             _context = context;
         }
 
-        public IActionResult Index(int? id, int? tagId, int? year, int? month, VmNews VmFilter, string searchData, int page = 1)
+        public IActionResult Index(int? id, int? cateId, int? tagId, int? year, int? month, VmNews VmFilter, string searchData, int page = 1)
         {
             var userId = _userManager.GetUserId(User);
             TempData["Controller"] = "News";
 
             decimal pageItemCount = 6;
-            ViewBag.Page = "blog";
+            ViewBag.Page = "news";
             ViewBag.UserId = userId;
 
             
 
             ViewBag.categoryId = id;
-            IList<News.Models.News> newss = _context.News.Include(saved => saved.SavedNews).Include(lord=>lord.LikeAndDislikes).Include(u => u.User).ThenInclude(us => us.SocialToUsers).ThenInclude(soc => soc.Social).Include(scc=>scc.Category).ThenInclude(scs=>scs.NewsCategory).Where(b => (id != null ? b.CategoryId == id : true) &&
+            IList<News.Models.News> newss = _context.News.Include(saved => saved.SavedNews).Include(lord=>lord.LikeAndDislikes).Include(u => u.User).ThenInclude(us => us.SocialToUsers).ThenInclude(soc => soc.Social).Include(scc=>scc.Category).ThenInclude(scs=>scs.NewsCategory).Where(b => (id != null ? b.Category.NewsCategoryId == id : true) && (cateId != null ? b.CategoryId == cateId : true) &&
                                                                 (tagId != null ? b.TagToNews.Any(t => t.TagId == tagId) : true) &&
                                                                 (year != null ? b.AddedDate.Year == year : true) &&
                                                                 (month != null ? b.AddedDate.Month == month : true) &&
@@ -63,7 +63,8 @@ namespace News.Controllers
             {
                 News = products,
                 RecentPost = _context.News.Include(c => c.User).Where(s => s.NewsStatus == NewsStatus.Active).OrderByDescending(o => o.AddedDate).Take(4).ToList(),
-                Categories = _context.NewsCategories.Include(b => b.NewsSubCategories).Where(bb => bb.News.Any(s => s.NewsStatus == NewsStatus.Active)).ToList(),
+                Categories = _context.NewsCategories.Include(s=>s.NewsSubCategories).ThenInclude(d=>d.News).Where(aa=>aa.NewsSubCategories.Any(bb=>bb.News.Count != 0 && aa.NewsSubCategories.Count != 0)).ToList(),
+                NewsSubCategories = _context.NewsSubCategories.Include(nc=>nc.NewsCategory).Include(b => b.News).Where(bb => bb.News.Any(s => s.NewsStatus == NewsStatus.Active)).ToList(),
                 Comments = _context.NewsComments.ToList(),
                 Tags = _context.NewsTags.Include(b => b.TagToNews).ThenInclude(bl => bl.News).ToList(),
                 Setting = _context.Settings.FirstOrDefault(),
@@ -75,10 +76,29 @@ namespace News.Controllers
         
 
 
-        public IActionResult Details()
+        public IActionResult Details(int id)
         {
             TempData["Controller"] = "NewsDetails";
-            return View();
+            ViewBag.Page = "news";
+            int catId = _context.News.Find(id).CategoryId;
+            var userIdd = _userManager.GetUserId(User);
+            var newsUser = _context.News.Find(id).UserId;
+            ViewBag.categoryId = catId;
+            VmNews model = new VmNews()
+            {
+                New = _context.News.Include(t => t.TagToNews).ThenInclude(t => t.Tag).Include(u => u.User).ThenInclude(us => us.SocialToUsers).ThenInclude(soc => soc.Social).Include(saved=>saved.SavedNews).Include(like=>like.LikeAndDislikes).FirstOrDefault(b => b.Id == id),
+                News = _context.News.Include(saved => saved.SavedNews).Include(lord => lord.LikeAndDislikes).Include(u => u.User).ThenInclude(us => us.SocialToUsers).ThenInclude(soc => soc.Social).Include(scc => scc.Category).ThenInclude(scs => scs.NewsCategory).Where(aa => aa.User.SocialToUsers.Any(bb => bb.User.Id == newsUser)).ToList(),
+                Categories = _context.NewsCategories.Include(s => s.NewsSubCategories).ThenInclude(d => d.News).Where(aa => aa.NewsSubCategories.Any(bb => bb.News.Count != 0 && aa.NewsSubCategories.Count != 0)).ToList(),
+                NewsSubCategories = _context.NewsSubCategories.Include(nc => nc.NewsCategory).Include(b => b.News).Where(bb => bb.News.Any(s => s.NewsStatus == NewsStatus.Active)).ToList(),
+                Comments = _context.NewsComments.Include(u => u.User).Where(c => c.NewsId == id).ToList(),
+                RecentPost = _context.News.Where(s => s.NewsStatus == NewsStatus.Active).OrderByDescending(o => o.AddedDate).Take(3).ToList(),
+                Tags = _context.NewsTags.Include(tb => tb.TagToNews).ThenInclude(b => b.News).Where(t => t.TagToNews.Any(tbb => tbb.NewsId == id)).ToList(),
+                Setting = _context.Settings.FirstOrDefault(),
+                Socials = _context.Socials.ToList(),
+            };
+
+
+            return View(model);
         }
 
 
