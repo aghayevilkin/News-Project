@@ -31,7 +31,7 @@ namespace News.Controllers
         {
             var userId = _userManager.GetUserId(User);
             TempData["Controller"] = "News";
-
+            ViewBag.Page = "news";
             decimal pageItemCount = 6;
             ViewBag.Page = "news";
             ViewBag.UserId = userId;
@@ -326,6 +326,39 @@ namespace News.Controllers
             }
             return Json(200);
         }
+
+
+
+        public JsonResult addToNewsCount(int? newsId, int? count )
+        {
+            if (newsId == null && count==0)
+            {
+                return Json(404);
+            }
+
+            var model = _context.News.Find(newsId);
+
+            var oldCount = model.ViewCount;
+            if (model != null)
+            {
+                model.ViewCount = oldCount + (int)count;
+
+                _context.Entry(model).State = EntityState.Modified;
+                _context.Entry(model).Property(a => a.UserId).IsModified = false;
+                _context.Entry(model).Property(a => a.AddedDate).IsModified = false;
+
+                _context.SaveChanges();
+            }
+            else
+            {
+                return Json(404);
+            }
+
+
+
+            return Json(200);
+        }
+
 
     }
 }

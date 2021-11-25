@@ -41,12 +41,12 @@ namespace News
 
             services.AddAuthentication().AddGoogle(options =>
             {
-                options.ClientId = "1030061333276-pkn7r9ppjoub4m4fgoj9e75co8vsbjph.apps.googleusercontent.com";
-                options.ClientSecret = "VTOikjga_pTA4MRzppxAMyRf";
+                options.ClientId = "1022133284646-4pdj21h5k5ag371m2q14k2et7vlh8s10.apps.googleusercontent.com";
+                options.ClientSecret = "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";
             }).AddFacebook(options =>
             {
-                options.AppId = "329358235396788";
-                options.AppSecret = "2dd18154f418af3761c5774a785703b7";
+                options.AppId = "399697588557869";
+                options.AppSecret = "cea4b9132bb0b0a838dbdc958c436cce";
             });
 
             services.Configure<IdentityOptions>(options =>

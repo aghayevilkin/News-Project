@@ -12,57 +12,11 @@
                     <h6 class="card-title">Order status</h6>
                     <div class="d-flex table-responsive">
                         <div class="btn-group mr-2">
-                            @*<a asp-controller="account" asp-action="createrole" class="btn btn-sm btn-info"><i class="mdi mdi-plus-circle-outline"></i> Add</a>*@
                             <button id="addRole" class="btn btn-sm btn-info"><i class="mdi mdi-plus-circle-outline"></i>Add Role</button>
                         </div>
                     </div>
                     <div class="table-responsive">
                         <table class="table mt-3 border-top"></table>
-                        @*<table class="table mt-3 border-top">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Name</th>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var role in Model)
-                                    {
-                                        <tr>
-                                            <th scope="row">@role.Id</th>
-                                            <td>@role.Name</td>
-                                            <td><a asp-controller="account" asp-action="updaterole" asp-route-id="@role.Id" class="btn btn-primary">Update</a></td>
-
-                                            <td>
-                                                <form asp-action="DeleteRole" asp-route-id="@role.Id" method="post">
-
-                                                    <span id="confirmDeleteSpan_@role.Id" style="display:none">
-                                                        <span>Are you sure you want to delete?</span>
-                                                        <button type="submit" class="btn btn-danger">Yes</button>
-                                                        <a href="#" class="btn btn-primary"
-                                                           onclick="confirmDelete('@role.Id', false)">No</a>
-                                                    </span>
-
-
-                                                    <span id="deleteSpan_@role.Id">
-                                                        <a href="#" class="btn btn-danger"
-                                                           onclick="confirmDelete('@role.Id', true)">Delete</a>
-                                                    </span>
-
-                                                </form>
-                                            </td>
-
-                                        </tr>
-
-
-
-
-
-                                    }
-                                </tbody>
-                            </table>*@
                     </div>
                 </div>
             </div>

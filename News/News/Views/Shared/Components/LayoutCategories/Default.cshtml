@@ -1,0 +1,20 @@
+﻿@model List<NewsCategory>
+@{
+    Layout = null;
+}
+
+@foreach (var item in Model.Take(8))
+{
+    <li class="@(ViewBag.Page == item.Name?"main-menu-active":"mega-menu-item")">
+        <a asp-controller="news" asp-action="index" asp-route-id="@item.Id">@item.Name</a>
+        <ul class="sub-menu">
+            @foreach (var sub in item.NewsSubCategories)
+            {
+                @if (sub.News.Count != 0)
+                {
+                    <li><a asp-controller="news" asp-action="index" asp-route-id="@item.Id" asp-route-cateId="@sub.Id">@sub.Name </a></li>
+                }
+            }
+        </ul>
+    </li>
+}

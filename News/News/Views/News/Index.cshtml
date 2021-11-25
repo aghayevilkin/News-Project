@@ -133,134 +133,132 @@
         <div class="row justify-content-center">
             @if (Model.News.Count != 0)
             {
-                <div class="col-md-10 col-lg-8 p-b-80">
-                    <div class="row">
-                        @foreach (News news in Model.News)
-                        {
-                            <div class="col-sm-6 p-r-25 p-r-15-sr991">
-                                <!-- Item latest -->
-                                <div class="m-b-45">
-                                    <a asp-controller="news" asp-action="details" asp-route-id="@news.Id" class="wrap-pic-w hov1 trans-03">
-                                        <img style="background-size: cover; background-position: center center; height: 225px; " src="~/Uploads/Images/News/@news.Image" alt="IMG">
-                                    </a>
+            <div class="col-md-10 col-lg-8 p-b-80">
+                <div class="row">
+                    @foreach (News news in Model.News)
+                    {
+                        <div class="col-sm-6 p-r-25 p-r-15-sr991">
+                            <!-- Item latest -->
+                            <div class="m-b-45">
+                                <a asp-controller="news" asp-action="details" asp-route-id="@news.Id" class="wrap-pic-w hov1 trans-03 news-clip-path">
+                                    <img style="background-size: cover; background-position: center center; height: 225px; " src="~/Uploads/Images/News/@news.Image" alt="IMG">
+                                </a>
 
-                                    <div class="news-content">
-                                        <span class="f1-s-3 cateBlog">
-                                            <span class="dis-block how1-child2 f1-s-5 cl0 bo-all-1 trans-03 p-rl-5 p-t-2"
-                                                  style="color: #aaaaaa; border-color: #aaaaaa; ">
-                                                @news.Category.NewsCategory.Name
-                                            </span>
-                                            @if (SignInManager.IsSignedIn(User))
-                                            {
-                                                <i class="@(news.SavedNews.Any(s => s.UserId == ViewBag.UserId) == true ? "fas added" : "far")  fa-bookmark fa-2x blog-bookmarked" data-id="@news.Id"></i>
-                                            }
-
+                                <div class="news-content">
+                                    <span class="f1-s-3 cateBlog">
+                                        <span class="dis-block how1-child2 f1-s-5 cl0 bo-all-1 trans-03 p-rl-5 p-t-2"
+                                              style="color: #aaaaaa; border-color: #aaaaaa; ">
+                                            @news.Category.NewsCategory.Name
                                         </span>
+                                        @if (SignInManager.IsSignedIn(User))
+                                        {
+                                            <i class="@(news.SavedNews.Any(s => s.UserId == ViewBag.UserId) == true ? "fas added" : "far")  fa-bookmark fa-2x blog-bookmarked" data-id="@news.Id"></i>
+                                        }
 
-                                        <div class="when">
-                                            <div class="when-date">
-                                                <div class="date-day">@news.AddedDate.Date.ToString("dd")</div>
-                                                <div class="date-month">@news.AddedDate.Date.ToString("MMM")</div>
-                                                <div class="date-year" style="display:none;">
-                                                    @news.AddedDate.Date.ToString("yyyy")
-                                                </div>
+                                    </span>
+
+                                    <div class="when">
+                                        <div class="when-date">
+                                            <div class="date-day">@news.AddedDate.Date.ToString("dd")</div>
+                                            <div class="date-month">@news.AddedDate.Date.ToString("MMM")</div>
+                                            <div class="date-year" style="display:none;">
+                                                @news.AddedDate.Date.ToString("yyyy")
                                             </div>
-                                            <div class="when-time">@news.AddedDate.ToString("HH:mm")</div>
                                         </div>
-
-
-                                        <div class="p-t-16">
-                                            <h5 class="p-b-5 m-2">
-                                                <a asp-controller="news" asp-action="details" asp-route-id="@news.Id" class="f1-m-3 cl2 hov-cl10 trans-03">
-                                                    @news.Title
-                                                </a>
-                                            </h5>
-
-                                            @{
-                                                var userId = _userManager.GetUserId(User);
-
-                                                List<LikeAndDislike> LikeCount = _context.LikeAndDislikes.Where(aa => aa.NewsId == news.Id && aa.LikeAndDislikeStatus==LikeAndDislikeStatus.Like).ToList();
-                                                List<LikeAndDislike> DislikeCount = _context.LikeAndDislikes.Where(aa => aa.NewsId == news.Id && aa.LikeAndDislikeStatus==LikeAndDislikeStatus.Dislike).ToList();
-                                                List<LikeAndDislike> LikeIcon = _context.LikeAndDislikes.Where(aa => aa.NewsId == news.Id && aa.UserId == userId && aa.LikeAndDislikeStatus==LikeAndDislikeStatus.Like).ToList();
-                                                List<LikeAndDislike> DislikeIcon = _context.LikeAndDislikes.Where(aa => aa.NewsId == news.Id && aa.UserId == userId && aa.LikeAndDislikeStatus==LikeAndDislikeStatus.Dislike).ToList();
-
-                                                var Likecount = LikeCount.Count;
-                                                var Dislikecount = DislikeCount.Count;
-
-                                                var aa = 0;
-                                                var bb = "";
-                                                var cc = "";
-
-                                                foreach (var likeicon in LikeIcon)
-                                                {
-                                                    aa =  (int)likeicon.LikeAndDislikeStatus;
-
-                                                    if (aa==1)
-                                                    {
-                                                        bb = "like-added";
-                                                    }
-                                                    else
-                                                    {
-                                                        bb = "";
-                                                    }
-
-                                                }
-
-                                                foreach (var dislikeicon in DislikeIcon)
-                                                {
-                                                    aa = (int)dislikeicon.LikeAndDislikeStatus;
-
-                                                    if (aa == 2)
-                                                    {
-                                                        cc = "dislike-added";
-                                                    }
-                                                    else
-                                                    {
-                                                        cc = "";
-                                                    }
-
-                                                }
-
-
-                                            }
-
-                                            <div class="stats">
-                                                <div class="stats-i-container stats-like-active stats_likes @(SignInManager.IsSignedIn(User)==true?"news-like":"like-hover")  @bb"
-                                                     data-id="@news.Id"
-                                                     data-likecount="@Likecount">
-
-                                                    <span class="stats-i">
-                                                        <i class="fas fa-thumbs-up likeCount">@Likecount</i>
-                                                    </span>
-                                                </div>
-                                                <div class="stats-i-container stats-like-active stats_dislikes @(SignInManager.IsSignedIn(User)==true?"news-dislike":"dislike-hover") @cc"
-                                                     data-id="@news.Id"
-                                                     data-dislikecount="@Dislikecount">
-                                                    <span class="stats-i"><i class="fas fa-thumbs-down dislikeCount"></i>@Dislikecount</span>
-                                                </div>
-                                                <div class="stats-i-container stats_views">
-                                                    <span class="stats-i"><i class="fas fa-eye"></i> 111</span>
-                                                </div>
-                                            </div>
-
-
-                                        </div>
+                                        <div class="when-time">@news.AddedDate.ToString("HH:mm")</div>
                                     </div>
 
 
+                                    <div class="p-t-16">
+                                        <h5 class="p-b-5 m-2">
+                                            <a asp-controller="news" asp-action="details" asp-route-id="@news.Id" class="f1-m-3 cl2 hov-cl10 trans-03">
+                                                @news.Title
+                                            </a>
+                                        </h5>
+
+                                        @{
+                                            var userId = _userManager.GetUserId(User);
+
+                                            List<LikeAndDislike> LikeCount = _context.LikeAndDislikes.Where(aa => aa.NewsId == news.Id && aa.LikeAndDislikeStatus == LikeAndDislikeStatus.Like).ToList();
+                                            List<LikeAndDislike> DislikeCount = _context.LikeAndDislikes.Where(aa => aa.NewsId == news.Id && aa.LikeAndDislikeStatus == LikeAndDislikeStatus.Dislike).ToList();
+                                            List<LikeAndDislike> LikeIcon = _context.LikeAndDislikes.Where(aa => aa.NewsId == news.Id && aa.UserId == userId && aa.LikeAndDislikeStatus == LikeAndDislikeStatus.Like).ToList();
+                                            List<LikeAndDislike> DislikeIcon = _context.LikeAndDislikes.Where(aa => aa.NewsId == news.Id && aa.UserId == userId && aa.LikeAndDislikeStatus == LikeAndDislikeStatus.Dislike).ToList();
+
+                                            var Likecount = LikeCount.Count;
+                                            var Dislikecount = DislikeCount.Count;
+
+                                            var aa = 0;
+                                            var bb = "";
+                                            var cc = "";
+
+                                            foreach (var likeicon in LikeIcon)
+                                            {
+                                                aa = (int)likeicon.LikeAndDislikeStatus;
+
+                                                if (aa == 1)
+                                                {
+                                                    bb = "like-added";
+                                                }
+                                                else
+                                                {
+                                                    bb = "";
+                                                }
+
+                                            }
+
+                                            foreach (var dislikeicon in DislikeIcon)
+                                            {
+                                                aa = (int)dislikeicon.LikeAndDislikeStatus;
+
+                                                if (aa == 2)
+                                                {
+                                                    cc = "dislike-added";
+                                                }
+                                                else
+                                                {
+                                                    cc = "";
+                                                }
+                                            }
+                                        }
+
+                                        <div class="stats">
+                                            <div class="stats-i-container stats-like-active stats_likes @(SignInManager.IsSignedIn(User)==true?"news-like":"like-hover")  @bb"
+                                                 data-id="@news.Id"
+                                                 data-likecount="@Likecount">
+
+                                                <span class="stats-i">
+                                                    <i class="fas fa-thumbs-up likeCount">@Likecount</i>
+                                                </span>
+                                            </div>
+                                            <div class="stats-i-container stats-like-active stats_dislikes @(SignInManager.IsSignedIn(User)==true?"news-dislike":"dislike-hover") @cc"
+                                                 data-id="@news.Id"
+                                                 data-dislikecount="@Dislikecount">
+                                                <span class="stats-i"><i class="fas fa-thumbs-down dislikeCount"></i>@Dislikecount</span>
+                                            </div>
+                                            <div class="stats-i-container stats_views">
+                                                <span class="stats-i"><i class="fas fa-eye"></i> @news.ViewCount</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        }
+                        </div>
+                    }
 
 
-                    </div>
-
-                    <!-- Pagination -->
-                    <div class="flex-wr-s-c m-rl--7 p-t-15">
-                        <a href="#" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7 pagi-active">1</a>
-                        <a href="#" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7">2</a>
-                    </div>
                 </div>
+
+                <!-- Pagination -->
+                <div class="flex-wr-s-c m-rl--7 p-t-15">
+                    @for (int i = 1; i <= ViewBag.PageCount; i++)
+                    {
+                        <a asp-controller="news" asp-action="index" asp-all-route-data="@ViewBag.Filter" asp-route-page="@i" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7 @(ViewBag.ActivePage==i?"pagi-active":"")">@i</a>
+                    }
+                </div>              
+
+
+
+            </div>
             }
             else
             {
@@ -291,30 +289,11 @@
                         <ul class="p-t-35 p-l-0">
                             @foreach (var item in Model.Categories)
                             {
-
                                  <li class="p-rl-4  @(ViewBag.categoryId == item.Id?"item-active":"item-cate")">
                                      <a asp-controller="news" asp-action="index" asp-route-id="@item.Id" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
                                          @item.Name <span style=" position: absolute; right: 25px;"> @item.NewsSubCategories.Sum(d => d.News.Count()) </span>
-                                     </a>
-                                 
-                                     <ul style="padding-left: 10px; border-bottom: 1px solid #AAAAAA;">
-                                         @foreach (var sub in item.NewsSubCategories)
-                                         {
-                                             @if (sub.News.Count != 0)
-                                             {
-                                                 <li class="how-bor1 p-rl-5 p-tb-5" style="list-style:inside;">
-                                                     <a asp-controller="news" asp-action="index" asp-route-id="@item.Id" asp-route-cateId="@sub.Id" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
-                                                         @sub.Name   <span> (@sub.News.Count()) </span>
-                                 
-                                                     </a>
-                                                 </li>
-                                             }
-                                 
-                                         }
-                                     </ul>
-                                 
+                                     </a>                             
                                  </li>
-
                             }
                         </ul>
                     </div>
@@ -329,55 +308,19 @@
                         </div>
 
                         <ul class="p-t-35">
-                            <li class="flex-wr-sb-s p-b-22">
-                                <div class="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
-                                    1
-                                </div>
-
-                                <a href="#" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                                </a>
-                            </li>
-
-                            <li class="flex-wr-sb-s p-b-22">
-                                <div class="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
-                                    2
-                                </div>
-
-                                <a href="#" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-                                    Proin velit consectetur non neque
-                                </a>
-                            </li>
-
-                            <li class="flex-wr-sb-s p-b-22">
-                                <div class="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
-                                    3
-                                </div>
-
-                                <a href="#" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-                                    Nunc vestibulum, enim vitae condimentum volutpat lobortis ante
-                                </a>
-                            </li>
-
-                            <li class="flex-wr-sb-s p-b-22">
-                                <div class="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
-                                    4
-                                </div>
-
-                                <a href="#" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-                                    Proin velit justo consectetur non neque elementum
-                                </a>
-                            </li>
-
-                            <li class="flex-wr-sb-s p-b-22">
-                                <div class="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0">
-                                    5
-                                </div>
-
-                                <a href="#" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-                                    Proin velit consectetur non neque
-                                </a>
-                            </li>
+                            @{ var k = 1;}
+                            @foreach (var item in Model.News.Where(aa => aa.LikeAndDislikes.Any(bb => bb.LikeAndDislikeStatus == LikeAndDislikeStatus.Like)).OrderByDescending(cc => cc.LikeAndDislikes.Count).Take(5))
+                            {
+                                <li class="flex-wr-sb-s p-b-22">
+                                    <div class="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
+                                        @k
+                                    </div>
+                                    <a asp-controller="news" asp-action="details" asp-route-id="@item.Id" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
+                                        @item.Title
+                                    </a>
+                                </li>
+                                k++;
+                            }
                         </ul>
                     </div>
 
@@ -386,15 +329,13 @@
                         <h5 class="f1-m-5 cl0 p-b-10">
                             Subscribe
                         </h5>
-
                         <p class="f1-s-1 cl0 p-b-25">
                             Get all latest content delivered to your email a few times a month.
                         </p>
+                        <form class="size-a-9 pos-relative" id="subscribe-form" method="post">
+                            <input class="s-full f1-m-6 cl6 plh9 p-l-20 p-r-55" type="email" id="subscribe-input" placeholder="Email">
 
-                        <form class="size-a-9 pos-relative">
-                            <input class="s-full f1-m-6 cl6 plh9 p-l-20 p-r-55" type="text" name="email" placeholder="Email">
-
-                            <button class="size-a-10 flex-c-c ab-t-r fs-16 cl9 hov-cl10 trans-03">
+                            <button type="submit" class="size-a-10 flex-c-c ab-t-r fs-16 cl9 hov-cl10 trans-03">
                                 <i class="fa fa-arrow-right"></i>
                             </button>
                         </form>
@@ -407,44 +348,18 @@
                                 Tags
                             </h3>
                         </div>
-
                         <div class="flex-wr-s-s m-rl--5">
-                            <a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                Fashion
-                            </a>
-
-                            <a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                Lifestyle
-                            </a>
-
-                            <a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                Denim
-                            </a>
-
-                            <a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                Streetstyle
-                            </a>
-
-                            <a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                Crafts
-                            </a>
-
-                            <a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                Magazine
-                            </a>
-
-                            <a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                News
-                            </a>
-
-                            <a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                Blogs
-                            </a>
+                            @foreach (NewsTag tag in Model.Tags)
+                            {
+                                if (tag.TagToNews.Count != 0)
+                                {
+                                    <a asp-controller="news" asp-action="index" asp-route-tagId="@tag.Id" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                        @tag.Name
+                                    </a>
+                                }
+                            }
                         </div>
                     </div>
-
-
-
                 </div>
             </div>
         </div>

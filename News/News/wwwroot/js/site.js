@@ -189,19 +189,57 @@
 
     });
 
+
+
+    $("#subscribe-form").submit(function (e) {
+        e.preventDefault();
+
+        var email = $("#subscribe-input").val();
+
+        var pattern = /^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i;
+
+        if (email == "") {
+            toastr.error('Please, input your email address.', { timeOut: 2000 });
+        }
+        else if (!pattern.test(email)) {
+            toastr.error('Not a valid e-mail address.', { timeOut: 2000 });
+        }
+        else {
+            $.ajax({
+
+                url: "/contact/addSubscribe/",
+                type: "get",
+                dataType: "json",
+
+                data: { email: email },
+                success: function (response) {
+                    if (response == 200) {
+                        //success
+                        $("#subscribe-input").val('');
+                        toastr.success('Now you are our subscriber, Thank you!', { timeOut: 2000 });
+
+                    } else if (response == 411) {
+                        //error
+                        toastr.error('You can subscribe once with this email!', { timeOut: 2000 });
+                    }
+                    else {
+                        //error
+                        toastr.error('Please, input your email address.', { timeOut: 2000 });
+                    }
+                },
+                error: function (response) {
+
+                    console.log("error: " + response);
+                }
+
+            });
+
+        }
+
+    });
+
 });
 
-
-//window.addEventListener("unload", function () {
-//    var count = parseInt(localStorage.getItem('counter') || 0);
-
-//    localStorage.setItem('counter', ++count)
-//    console.log(count);
-//}, false);
-
-//if (localStorage.getItem('counter') == 6) {
-//    alert('You refreshed page 6 times')
-//}
 
 
 function readURL(input) {

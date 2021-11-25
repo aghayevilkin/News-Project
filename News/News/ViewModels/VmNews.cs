@@ -13,7 +13,6 @@ namespace News.ViewModels
         public List<NewsSubCategory> NewsSubCategories { get; set; }
         public List<NewsComment> Comments { get; set; }
         public NewsComment Comment { get; set; }
-        public List<NewsTag> Tags { get; set; }
         public List<SavedNews> SavedBlogs { get; set; }
         public VmNews Filter { get; set; }
         public int? catId { get; set; }

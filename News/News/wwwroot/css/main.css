@@ -1868,3 +1868,10 @@ a.breadcrumb-item:hover {
 @media (max-width: 480px) {
   
 }
+
+
+
+.news-clip-path {
+    -webkit-clip-path: polygon(90% 0, 100% 12%, 100% 100%, 0 100%, 0 0);
+    clip-path: polygon(90% 0, 100% 12%, 100% 100%, 0 100%, 0 0);
+}

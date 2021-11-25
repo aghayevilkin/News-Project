@@ -13,6 +13,9 @@ namespace News.ViewModels
         public VmRegister RegisterViewModel { get; set; }
         public List<Social> Socials { get; set; }
         public List<News.Models.News> News { get; set; }
+        public List<News.Models.News> LatestArticles { get; set; }
+        public List<NewsTag> Tags { get; set; }
+        public List<LikeAndDislike> LikeAndDislikes { get; set; }
         public List<Subscribe> Subscribes { get; set; }
         public CustomUser CustomUser { get; set; }
         public Setting Setting { get; set; }

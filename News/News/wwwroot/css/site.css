@@ -601,9 +601,95 @@ label {
     border: unset;
     background-color: #334564;
 }
-    
+.statsDetailsLikeHover:hover {
+    background-color: #334564;
+}
+
+
+ 
 
 /*Layouts*/
 .main-menu > .li-home > a::after {
     display: none;
+}
+
+
+/*Social Login*/
+
+.social-login ul {
+    margin: 0;
+    width: 100%;
+    padding: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+    .social-login ul li {
+        display: inline-block;
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        width: 50%;
+        list-style: none;
+        padding: 0 10px;
+    }
+
+        .social-login ul li a.btn {
+            width: 50%;
+            border-radius: 5px;
+            color: #fff;
+            background: #f4f5f7;
+        }
+
+            .social-login ul li a.btn.connect-fb {
+                background: #3b5998;
+            }
+
+            .social-login ul li a.btn.connect-google {
+                background: #00997d;
+            }
+
+.facebook_login__icon {
+    fill: #fff;
+    margin-right: 0;
+}
+
+.facebook_login {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 70px;
+    height: 50px;
+    margin-left: 10px;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 24px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    background: #3b5998;
+}
+
+.social-login ul li button a.btn.connect-Facebook {
+    background: #3b5998;
+}
+
+.social-login ul li button a.btn.connect-Google {
+    background: #00997d;
+}
+.ti-icon {
+    position: absolute;
+    top: 16px;
+    left: 3px;
 }
