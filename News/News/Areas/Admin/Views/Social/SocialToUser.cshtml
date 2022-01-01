@@ -1,0 +1,53 @@
+﻿@model List<SocialToUser>
+@{
+    ViewData["Title"] = "Social To User";
+}
+
+<div class="content-wrapper">
+    <div class="row grid-margin">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">Order status</h6>
+                    <div class="d-flex table-responsive">
+                        <div class="mr-2">
+                            <a asp-controller="social" asp-action="socialtousercreate" class="btn btn-info"><i class="mdi mdi-plus-circle-outline"></i> Add</a>
+                            <a asp-controller="social" asp-action="index" class="btn btn-danger"> Social</a>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table mt-3 border-top">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Link</th>
+                                    <th>Social Id</th>
+                                    <th>User Id</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    var i = 1;
+                                }
+                                @foreach (var social in Model)
+                                {
+
+                                    <tr>
+                                        <th scope="row">@i</th>
+                                        <td>@social.Link</td>
+                                        <td>@social.SocialId</td>
+                                        <td>@social.UserId</td>
+                                        <td><a asp-controller="social" asp-action="socialtouserupdate" asp-route-id="@social.Id" class="btn btn-primary">Update</a></td>
+                                        <td><a onclick="return confirm('Are you sure?')" asp-controller="social" asp-action="socialtouserdelete" asp-route-id="@social.Id" class="btn btn-danger">Delete</a></td>
+                                    </tr>
+                                    i++;
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

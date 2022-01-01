@@ -39,6 +39,7 @@ namespace News.Controllers
             
 
             ViewBag.categoryId = id;
+            ViewBag.subcategoryId = cateId;
             IList<News.Models.News> newss = _context.News.Include(saved => saved.SavedNews).Include(lord=>lord.LikeAndDislikes).Include(u => u.User).ThenInclude(us => us.SocialToUsers).ThenInclude(soc => soc.Social).Include(scc=>scc.Category).ThenInclude(scs=>scs.NewsCategory).Where(b => (id != null ? b.Category.NewsCategoryId == id : true) && (cateId != null ? b.CategoryId == cateId : true) &&
                                                                 (tagId != null ? b.TagToNews.Any(t => t.TagId == tagId) : true) &&
                                                                 (year != null ? b.AddedDate.Year == year : true) &&

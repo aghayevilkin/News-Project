@@ -222,7 +222,7 @@
                                         }
 
                                         <div class="stats">
-                                            <div class="stats-i-container stats-like-active stats_likes @(SignInManager.IsSignedIn(User)==true?"news-like":"like-hover")  @bb"
+                                            <div class="stats-i-container stats-like-active stats_likes @(SignInManager.IsSignedIn(User) == true ? "news-like" : "like-hover")  @bb"
                                                  data-id="@news.Id"
                                                  data-likecount="@Likecount">
 
@@ -230,7 +230,7 @@
                                                     <i class="fas fa-thumbs-up likeCount">@Likecount</i>
                                                 </span>
                                             </div>
-                                            <div class="stats-i-container stats-like-active stats_dislikes @(SignInManager.IsSignedIn(User)==true?"news-dislike":"dislike-hover") @cc"
+                                            <div class="stats-i-container stats-like-active stats_dislikes @(SignInManager.IsSignedIn(User) == true ? "news-dislike" : "dislike-hover") @cc"
                                                  data-id="@news.Id"
                                                  data-dislikecount="@Dislikecount">
                                                 <span class="stats-i"><i class="fas fa-thumbs-down dislikeCount"></i>@Dislikecount</span>
@@ -243,7 +243,7 @@
                                 </div>
                             </div>
                         </div>
-                    }
+                                            }
 
 
                 </div>
@@ -252,16 +252,16 @@
                 <div class="flex-wr-s-c m-rl--7 p-t-15">
                     @for (int i = 1; i <= ViewBag.PageCount; i++)
                     {
-                        <a asp-controller="news" asp-action="index" asp-all-route-data="@ViewBag.Filter" asp-route-page="@i" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7 @(ViewBag.ActivePage==i?"pagi-active":"")">@i</a>
+                        <a asp-controller="news" asp-action="index" asp-all-route-data="@ViewBag.Filter" asp-route-page="@i" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7 @(ViewBag.ActivePage == i ? "pagi-active" : "")">@i</a>
                     }
                 </div>              
 
 
 
             </div>
-            }
-            else
-            {
+                                            }
+                                            else
+                                            {
                 <div class="col-md-10 col-lg-8 p-b-80">
                     <div class="row">
                         <div class="how2 how2-cl4 flex-s-c">
@@ -271,7 +271,7 @@
                         </div>
                     </div>
                 </div>
-            }
+                                            }
 
 
             <div class="col-md-10 col-lg-4 p-b-80">
@@ -282,18 +282,43 @@
                     <div class="p-b-60">
                         <div class="how2 how2-cl4 flex-s-c">
                             <h3 class="f1-m-2 cl3 tab01-title">
-                                Category
+                                @(ViewBag.categoryId==null?"Category":"")
+                                @foreach (var item in Model.Categories) { @(ViewBag.categoryId == item.Id ? item.Name :"");
+                                }
                             </h3>
                         </div>
 
                         <ul class="p-t-35 p-l-0">
                             @foreach (var item in Model.Categories)
                             {
-                                 <li class="p-rl-4  @(ViewBag.categoryId == item.Id?"item-active":"item-cate")">
-                                     <a asp-controller="news" asp-action="index" asp-route-id="@item.Id" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
-                                         @item.Name <span style=" position: absolute; right: 25px;"> @item.NewsSubCategories.Sum(d => d.News.Count()) </span>
-                                     </a>                             
-                                 </li>
+
+                                if (ViewBag.categoryId == null)
+                                {
+                                    <li class="p-rl-4  @(ViewBag.categoryId == item.Id?"item-active":"item-cate")">
+                                        <a asp-controller="news" asp-action="index" asp-route-id="@item.Id" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
+                                            @item.Name <span style=" position: absolute; right: 25px;"> @item.NewsSubCategories.Sum(d => d.News.Count()) </span>
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    if (ViewBag.categoryId == item.Id)
+                                    {
+                                        foreach (var sub in item.NewsSubCategories)
+                                        {
+                                            if (sub.News.Count != 0)
+                                            {
+                                                <li class="p-rl-4 @(ViewBag.subcategoryId == sub.Id?"item-active":"item-cate")">
+                                                    <a asp-controller="news" asp-action="index" asp-route-id="@item.Id" asp-route-cateId="@sub.Id" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
+                                                        @sub.Name <span style=" position: absolute; right: 25px;"> @sub.News.Count </span>
+                                                    </a>
+                                                </li>
+                                            }
+                                        }
+                                    }
+                                }
+
+
                             }
                         </ul>
                     </div>

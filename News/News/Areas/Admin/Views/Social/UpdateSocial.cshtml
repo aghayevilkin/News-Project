@@ -1,0 +1,32 @@
+﻿@model Social
+@{
+    ViewData["Title"] = "UpdateSocial";
+}
+
+<div class="content-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="mt-5">Create Social</h2>
+            </div>
+            <div class="col-6">
+                <form asp-controller="social" asp-action="updatesocial" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="Icon">Icon</label>
+                        <input type="text" class="form-control" id="Icon" asp-for="Icon" placeholder="zmdi zmdi-facebook">
+                    </div>
+                    <div class="form-group">
+                        <label for="Link">Link</label>
+                        <input type="text" class="form-control" id="Link" asp-for="Link" placeholder="https://facebook.com">
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button asp-action="index" class="btn btn-danger">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

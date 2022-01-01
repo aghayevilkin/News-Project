@@ -1,0 +1,22 @@
+﻿@model List<NewsCategory>
+@{
+    Layout = null;
+}
+<div class="col-sm-6 col-lg-4 p-b-20">
+    <div class="size-h-3 flex-s-c">
+        <h5 class="f1-m-7 cl0">
+            Category
+        </h5>
+    </div>
+
+    <ul class="m-t--12">
+        @foreach (var item in Model.Take(8))
+        {
+            <li class="how-bor1 p-rl-5 p-tb-10">
+                <a asp-controller="news" asp-action="index" asp-route-id="@item.Id" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
+                    @item.Name @item.NewsSubCategories.Sum(a => a.News.Count)
+                </a>
+            </li>
+        }
+    </ul>
+</div>

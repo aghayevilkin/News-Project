@@ -1,0 +1,11 @@
+﻿@model List<Social>
+@{
+    Layout = null;
+}
+
+@foreach (var item in Model)
+{
+    <a href="@item.Link" target="_blank" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+        <span class="@item.Icon"></span>
+    </a>
+}

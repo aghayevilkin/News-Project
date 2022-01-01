@@ -200,3 +200,12 @@ C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\V
 C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\News\UpdateSubCategory.cshtml.g.cs
 C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\News.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\LayoutCategories\Default.cshtml.g.cs
+C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\FooterCategories\Default.cshtml.g.cs
+C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Social\Index.cshtml.g.cs
+C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Social\CreateSocial.cshtml.g.cs
+C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Social\UpdateSocial.cshtml.g.cs
+C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Social\SocialToUser.cshtml.g.cs
+C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Social\SocialToUserCreate.cshtml.g.cs
+C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Social\SocialToUserUpdate.cshtml.g.cs
+C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Contact\Subscribers.cshtml.g.cs
+C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Social\Default.cshtml.g.cs
