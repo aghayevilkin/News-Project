@@ -361,5 +361,60 @@ namespace News.Controllers
         }
 
 
+
+
+
+
+
+
+
+
+
+
+        public JsonResult GetNews(int? id, int? cateId, int? tagId, int? year, int? month, VmNews VmFilter, string searchData, int page = 1)
+        {
+            IList<News.Models.News> news = _context.News.Include(saved => saved.SavedNews).Include(lord => lord.LikeAndDislikes).Include(u => u.User).ThenInclude(us => us.SocialToUsers).ThenInclude(soc => soc.Social).Include(scc => scc.Category).ThenInclude(scs => scs.NewsCategory).Where(b => (id != null ? b.Category.NewsCategoryId == id : true) && (cateId != null ? b.CategoryId == cateId : true) &&
+                                                                       (tagId != null ? b.TagToNews.Any(t => t.TagId == tagId) : true) &&
+                                                                       (year != null ? b.AddedDate.Year == year : true) &&
+                                                                       (month != null ? b.AddedDate.Month == month : true) &&
+                                                                       (b.NewsStatus == NewsStatus.Active)
+                                                           ).Where(sr =>
+                                                                   ((searchData != null ? sr.Title.Contains(searchData) : true) || (searchData != null ? sr.Category.Name.Contains(searchData) : true)) &&
+                                                                   (VmFilter.catId != null ? sr.CategoryId == VmFilter.catId : true))
+                                                      .OrderByDescending(addedDate=>addedDate.AddedDate).ToList();
+
+            return Json(
+                new
+                {
+                    Result = from obj in news
+                             select new
+                             {
+                                 obj.Id,
+                                 obj.Title,
+                                 obj.Category.NewsCategory.Name,
+                                 obj.ViewCount,
+                                 obj.Image,
+                                 obj.LikeAndDislikes.Count
+                             }
+                }
+                );
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

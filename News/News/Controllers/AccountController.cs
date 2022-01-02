@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using News.Data;
 using News.Helpers.Mail;
@@ -810,6 +811,213 @@ namespace News.Controllers
 
 
 
+
+
+        //My Posts
+        public IActionResult Posts()
+        {
+            string userId = _userManager.GetUserId(User);
+            CustomUser customUsers = _context.CustomUsers.Find(userId);
+            List<CustomUser> customUserS = _context.CustomUsers.Include(u => u.SocialToUsers).ThenInclude(sc => sc.Social).Where(aa => aa.SocialToUsers.Any(bb => bb.User.Id == userId)).ToList();
+
+            News.Models.News newsdate = _context.News.Where(u => u.UserId == userId).OrderByDescending(d => d.AddedDate).LastOrDefault();
+            if (newsdate != null)
+            {
+                ViewBag.LastPostDate = newsdate.AddedDate;
+            }
+
+
+            VmProfile model = new VmProfile()
+            {
+                Posts = _context.News.Include(c => c.Category).ThenInclude(scs => scs.NewsCategory).Include(u => u.User).Include(tp => tp.TagToNews).ThenInclude(t => t.Tag).Where(p => p.UserId == userId).OrderByDescending(o => o.AddedDate).ToList(),
+                Tags = _context.NewsTags.Include(b => b.TagToNews).ThenInclude(bl => bl.News).ToList(),
+                Setting = _context.Settings.FirstOrDefault(),
+                Socials = _context.Socials.ToList(),
+                User = customUsers,
+                UserS = customUserS,
+            };
+            return View(model);
+        }
+
+
+        public IActionResult PostCreate()
+        {
+            string userId = _userManager.GetUserId(User);
+            CustomUser customUsers = _context.CustomUsers.Find(userId);
+            List<CustomUser> customUserS = _context.CustomUsers.Include(u => u.SocialToUsers).ThenInclude(sc => sc.Social).Where(aa => aa.SocialToUsers.Any(bb => bb.User.Id == userId)).ToList();
+
+            List<NewsCategory> categories = _context.NewsCategories.ToList();
+            categories.Insert(0, new NewsCategory() { Id = 0, Name = "Select" });
+            ViewBag.Categories = categories;
+
+            List<NewsSubCategory> subcategories = _context.NewsSubCategories.ToList();
+            subcategories.Insert(0, new NewsSubCategory() { Id = 0, Name = "Select" });
+            ViewBag.SubCategories = subcategories;
+
+            List<NewsTag> tags = _context.NewsTags.ToList();
+            ViewBag.Tags = tags;
+
+
+            VmProfile model = new VmProfile()
+            {
+                Posts = _context.News.Include(g => g.Category).ThenInclude(sc => sc.NewsCategory).Include(u => u.User).Include(tb => tb.TagToNews).ThenInclude(t => t.Tag).ToList(),
+                Post = new News.Models.News(),
+                Categories = ViewBag.Categories,
+                Tags = ViewBag.Tags,
+                Setting = _context.Settings.FirstOrDefault(),
+                Socials = _context.Socials.ToList(),
+                User = customUsers,
+                UserS = customUserS,
+            };
+            return View(model);
+        }
+
+
+        [HttpPost]
+        public IActionResult PostCreate(VmProfile model)
+        {
+            string userId = _userManager.GetUserId(User);
+            CustomUser customUsers = _context.CustomUsers.Find(userId);
+            List<CustomUser> customUserS = _context.CustomUsers.Include(u => u.SocialToUsers).ThenInclude(sc => sc.Social).Where(aa => aa.SocialToUsers.Any(bb => bb.User.Id == userId)).ToList();
+
+            model.User = customUsers;
+            model.UserS = customUserS;
+
+
+            model.Setting = _context.Settings.FirstOrDefault();
+            model.Socials = _context.Socials.ToList();
+            if (ModelState.IsValid)
+            {
+                if (model.Post.CategoryId == 0)
+                {
+                    ModelState.AddModelError("CategoryId", "Categoriya secmelisiniz!");
+                    List<NewsCategory> categories = _context.NewsCategories.ToList();
+                    categories.Insert(0, new NewsCategory() { Id = 0, Name = "Select" });
+                    ViewBag.Categories = categories;
+
+                    List<NewsSubCategory> subcategories = _context.NewsSubCategories.ToList();
+                    subcategories.Insert(0, new NewsSubCategory() { Id = 0, Name = "Select" });
+                    ViewBag.SubCategories = subcategories;
+
+                    List<NewsTag> tags = _context.NewsTags.ToList();
+                    ViewBag.Tags = tags;
+                    Notify("Categoriya secmelisiniz!", notificationType: NotificationType.warning);
+                    return View(model);
+                }
+                if (model.Post.ImageFile != null)
+                {
+                    if (model.Post.ImageFile.ContentType == "image/png" || model.Post.ImageFile.ContentType == "image/jpeg" || model.Post.ImageFile.ContentType == "image/gif" || model.Post.ImageFile.ContentType == "image/svg+xml")
+                    {
+                        if (model.Post.ImageFile.Length <= 2097152)
+                        {
+                            string fileName = Guid.NewGuid() + "-" + DateTime.Now.ToString("ddMMyyyyHHmmss") + "-" + model.Post.ImageFile.FileName;
+                            string filePath = Path.Combine(_hostingEnvironment.WebRootPath, "Uploads/Images/News", fileName);
+                            using (var stream = new FileStream(filePath, FileMode.Create))
+                            {
+                                model.Post.ImageFile.CopyTo(stream);
+                            }
+
+                            model.Post.Image = fileName;
+                            model.Post.NewsStatus = NewsStatus.Active;
+                            model.Post.UserId = _userManager.GetUserId(User);
+                            model.Post.AddedDate = DateTime.Now;
+
+                            _context.News.Add(model.Post);
+                            _context.SaveChanges();
+
+                            if (model.Post.TagIds == null)
+                            {
+                                Notify("Tag secmelisiniz!", notificationType: NotificationType.warning);
+                                return RedirectToAction("postcreate");
+                            }
+                            else
+                            {
+                                foreach (var item in model.Post.TagIds)
+                                {
+                                    TagToNews tagToNews = new TagToNews()
+                                    {
+                                        NewsId = model.Post.Id,
+                                        TagId = item
+                                    };
+
+                                    _context.TagToNews.Add(tagToNews);
+                                }
+                            }
+
+
+                            _context.SaveChanges();
+                            Notify("Post Created");
+
+                            return RedirectToAction("Index");
+                        }
+                        else
+                        {
+                            Notify("Siz maksimum 2 Mb hecmde fayllari upload ede bilersiniz!", notificationType: NotificationType.warning);
+                        }
+                    }
+                    else
+                    {
+                        Notify("Siz yalniz .jpeg, .png, .gif tipli fayllari upload ede bilersiniz!", notificationType: NotificationType.warning);
+                    }
+                }
+                else
+                {
+                    Notify("Image Secmelisiniz!", notificationType: NotificationType.warning);
+                }
+
+            }
+
+            Notify("News Not Added!", notificationType: NotificationType.error);
+            return RedirectToAction("postcreate");
+        }
+
+
+        public IActionResult PostDelete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            News.Models.News news = _context.News.Include(a => a.TagToNews).FirstOrDefault(i => i.Id == id);
+            if (news == null)
+            {
+                return NotFound();
+            }
+
+            //Delete image
+            string oldFilePath = Path.Combine(_hostingEnvironment.WebRootPath, "Uploads/Images/News", news.Image);
+            if (System.IO.File.Exists(oldFilePath))
+            {
+                System.IO.File.Delete(oldFilePath);
+            }
+
+
+            //Delete tags
+            foreach (var item in news.TagToNews)
+            {
+                _context.TagToNews.Remove(item);
+            }
+
+            _context.News.Remove(news);
+            _context.SaveChanges();
+
+            Notify("Post Deleted");
+            return RedirectToAction("posts");
+        }
+
+
+        public JsonResult LoadSubCategory(int id)
+        {
+            var subcategory = _context.NewsSubCategories.Where(z => z.NewsCategoryId == id).ToList();
+            return Json(new SelectList(subcategory, "Id", "Name"));
+        }
+
+
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
 
     }
 }

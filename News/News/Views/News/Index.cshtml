@@ -18,109 +18,72 @@
 <section class="bg0">
     <div class="container">
         <div class="row m-rl--1">
-            <div class="col-12 p-rl-1 p-b-2">
-                <div class="bg-img1 size-a-3 how1 pos-relative" style="background-image: url(images/entertaiment-16.jpg);">
-                    <a href="blog-detail-01.html" class="dis-block how1-child1 trans-03"></a>
-
-                    <div class="flex-col-e-s s-full p-rl-25 p-tb-20">
-                        <a href="#" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
-                            Celebrity
-                        </a>
-
-                        <h3 class="how1-child2 m-t-14 m-b-10">
-                            <a href="blog-detail-01.html" class="how-txt1 size-a-6 f1-l-1 cl0 hov-cl10 trans-03">
-                                Music quisque at ipsum vel orci eleifend ultrices
-                            </a>
-                        </h3>
-
-                        <span class="how1-child2">
-                            <span class="f1-s-4 cl11">
-                                Jack Sims
+            @foreach (var item in Model.News.Where(aa => aa.LikeAndDislikes.Any(bb => bb.LikeAndDislikeStatus == LikeAndDislikeStatus.Like)).OrderByDescending(cc => cc.LikeAndDislikes.Count).Take(1))
+            {
+                <div class="col-12 p-rl-1 p-b-2">
+                    <div class="bg-img1 size-a-3 how1 pos-relative" style="background-image: url(@Url.Content("~/Uploads/Images/News/"+item.Image))">
+                        <a asp-controller="news" asp-action="details" asp-route-id="@item.Id" class="dis-block how1-child1 trans-03"></a>
+                        <div class="flex-col-e-s s-full p-rl-25 p-tb-20">
+                            <span class="how1-child2">
+                                <a asp-controller="news" asp-action="index" asp-route-id="@item.Category.NewsCategory.Id" class="f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2 mr-2">
+                                    @item.Category.NewsCategory.Name
+                                </a>
+                                <a asp-controller="news" asp-action="index" asp-route-id="@item.Category.NewsCategory.Id" asp-route-cateId="@item.Category.Id" class="f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
+                                    @item.Category.Name
+                                </a>
                             </span>
 
-                            <span class="f1-s-3 cl11 m-rl-3">
-                                -
+                            <h3 class="how1-child2 m-t-14 m-b-10">
+                                <a asp-controller="news" asp-action="details" asp-route-id="@item.Id" class="how-txt1 size-a-6 f1-l-1 cl0 hov-cl10 trans-03">
+                                    @item.Title
+                                </a>
+                            </h3>
+
+                            <span class="how1-child2">
+                                <span class="f1-s-4 cl11">
+                                    @item.User.Name @item.User.Surname
+                                </span>
+
+                                <span class="f1-s-3 cl11 m-rl-3">
+                                    -
+                                </span>
+
+                                <span class="f1-s-3 cl11">
+                                    @item.AddedDate.Date.ToString("dd MMM yyyy")
+                                </span>
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+            }
+
+            @foreach (var item in Model.News.Where(aa => aa.LikeAndDislikes.Any(bb => bb.LikeAndDislikeStatus == LikeAndDislikeStatus.Like)).OrderByDescending(cc => cc.LikeAndDislikes.Count).Skip(1).Take(4))
+            {
+                <div class="col-sm-6 col-md-3 p-rl-1 p-b-2">
+                    <div class="bg-img1 size-a-14 how1 pos-relative" style="background-image: url(@Url.Content("~/Uploads/Images/News/"+item.Image))">
+                        <a asp-controller="news" asp-action="details" asp-route-id="@item.Id" class="dis-block how1-child1 trans-03"></a>
+
+                        <div class="flex-col-e-s s-full p-rl-25 p-tb-20">
+                            <span class="how1-child2">
+                                <a asp-controller="news" asp-action="index" asp-route-id="@item.Category.NewsCategory.Id" class="f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2 mr-2">
+                                    @item.Category.NewsCategory.Name
+                                </a>
+                                <a asp-controller="news" asp-action="index" asp-route-id="@item.Category.NewsCategory.Id" asp-route-cateId="@item.Category.Id" class="f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
+                                    @item.Category.Name
+                                </a>
                             </span>
 
-                            <span class="f1-s-3 cl11">
-                                Feb 16
-                            </span>
-                        </span>
+                            <h3 class="how1-child2 m-t-14">
+                                <a asp-controller="news" asp-action="details" asp-route-id="@item.Id" class="how-txt1 size-h-1 f1-m-1 cl0 hov-cl10 trans-03">
+                                    @item.Title
+                                </a>
+                            </h3>
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
 
-            <div class="col-sm-6 col-md-3 p-rl-1 p-b-2">
-                <div class="bg-img1 size-a-14 how1 pos-relative" style="background-image: url(images/entertaiment-02.jpg);">
-                    <a href="blog-detail-01.html" class="dis-block how1-child1 trans-03"></a>
-
-                    <div class="flex-col-e-s s-full p-rl-25 p-tb-20">
-                        <a href="#" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
-                            Game
-                        </a>
-
-                        <h3 class="how1-child2 m-t-14">
-                            <a href="blog-detail-01.html" class="how-txt1 size-h-1 f1-m-1 cl0 hov-cl10 trans-03">
-                                Pellentesque dui nibh, pellen-tesque ut dapibus ut
-                            </a>
-                        </h3>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-md-3 p-rl-1 p-b-2">
-                <div class="bg-img1 size-a-14 how1 pos-relative" style="background-image: url(images/entertaiment-03.jpg);">
-                    <a href="blog-detail-01.html" class="dis-block how1-child1 trans-03"></a>
-
-                    <div class="flex-col-e-s s-full p-rl-25 p-tb-20">
-                        <a href="#" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
-                            Music
-                        </a>
-
-                        <h3 class="how1-child2 m-t-14">
-                            <a href="blog-detail-01.html" class="how-txt1 size-h-1 f1-m-1 cl0 hov-cl10 trans-03">
-                                Motobike Vestibulum vene-natis purus nec nibh volutpat
-                            </a>
-                        </h3>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-md-3 p-rl-1 p-b-2">
-                <div class="bg-img1 size-a-14 how1 pos-relative" style="background-image: url(images/entertaiment-04.jpg);">
-                    <a href="blog-detail-01.html" class="dis-block how1-child1 trans-03"></a>
-
-                    <div class="flex-col-e-s s-full p-rl-25 p-tb-20">
-                        <a href="#" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
-                            Game
-                        </a>
-
-                        <h3 class="how1-child2 m-t-14">
-                            <a href="blog-detail-01.html" class="how-txt1 size-h-1 f1-m-1 cl0 hov-cl10 trans-03">
-                                Pellentesque dui nibh, pellen-tesque ut dapibus ut
-                            </a>
-                        </h3>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-md-3 p-rl-1 p-b-2">
-                <div class="bg-img1 size-a-14 how1 pos-relative" style="background-image: url(images/entertaiment-05.jpg);">
-                    <a href="blog-detail-01.html" class="dis-block how1-child1 trans-03"></a>
-
-                    <div class="flex-col-e-s s-full p-rl-25 p-tb-20">
-                        <a href="#" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
-                            Music
-                        </a>
-
-                        <h3 class="how1-child2 m-t-14">
-                            <a href="blog-detail-01.html" class="how-txt1 size-h-1 f1-m-1 cl0 hov-cl10 trans-03">
-                                Motobike Vestibulum vene-natis purus nec nibh volutpat
-                            </a>
-                        </h3>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </section>
@@ -133,135 +96,146 @@
         <div class="row justify-content-center">
             @if (Model.News.Count != 0)
             {
-            <div class="col-md-10 col-lg-8 p-b-80">
-                <div class="row">
-                    @foreach (News news in Model.News)
-                    {
-                        <div class="col-sm-6 p-r-25 p-r-15-sr991">
-                            <!-- Item latest -->
-                            <div class="m-b-45">
-                                <a asp-controller="news" asp-action="details" asp-route-id="@news.Id" class="wrap-pic-w hov1 trans-03 news-clip-path">
-                                    <img style="background-size: cover; background-position: center center; height: 225px; " src="~/Uploads/Images/News/@news.Image" alt="IMG">
-                                </a>
+                <div class="col-md-10 col-lg-8 p-b-80">
+                    <div class="row" id="NewS">
 
-                                <div class="news-content">
-                                    <span class="f1-s-3 cateBlog">
-                                        <span class="dis-block how1-child2 f1-s-5 cl0 bo-all-1 trans-03 p-rl-5 p-t-2"
-                                              style="color: #aaaaaa; border-color: #aaaaaa; ">
-                                            @news.Category.NewsCategory.Name
+                        @foreach (News news in Model.News)
+                        {
+                            <div class="col-sm-6 p-r-25 p-r-15-sr991">
+                                <!-- Item latest -->
+                                <div class="m-b-45">
+                                    <a asp-controller="news" asp-action="details" asp-route-id="@news.Id" class="wrap-pic-w hov1 trans-03 news-clip-path">
+                                        <img style="background-size: cover; background-position: center center; height: 225px; " src="~/Uploads/Images/News/@news.Image" alt="IMG">
+                                    </a>
+
+                                    <div class="news-content">
+                                        <span class="f1-s-3 cateBlog">
+                                            <span class="dis-block how1-child2 f1-s-5 cl0 bo-all-1 trans-03 p-rl-5 p-t-2"
+                                                  style="color: #aaaaaa; border-color: #aaaaaa; ">
+                                                @news.Category.NewsCategory.Name
+                                            </span>
+                                            @if (SignInManager.IsSignedIn(User))
+                                            {
+                                                <i class="@(news.SavedNews.Any(s => s.UserId == ViewBag.UserId) == true ? "fas added" : "far")  fa-bookmark fa-2x blog-bookmarked" data-id="@news.Id"></i>
+                                            }
+
                                         </span>
-                                        @if (SignInManager.IsSignedIn(User))
-                                        {
-                                            <i class="@(news.SavedNews.Any(s => s.UserId == ViewBag.UserId) == true ? "fas added" : "far")  fa-bookmark fa-2x blog-bookmarked" data-id="@news.Id"></i>
-                                        }
 
-                                    </span>
+                                        <div class="when">
+                                            <div class="when-date">
+                                                <div class="date-day">@news.AddedDate.Date.ToString("dd")</div>
+                                                <div class="date-month">@news.AddedDate.Date.ToString("MMM")</div>
+                                                @{ var newDate = Convert.ToInt32(news.AddedDate.Date.ToString("yyyy") + news.AddedDate.Date.ToString("dd"));
+                                                    var nowDate = Convert.ToInt32(DateTime.Now.ToString("yyyy") + DateTime.Now.ToString("dd"));
+                                                    ViewBag.NewDate = nowDate - 7;
+                                                }
 
-                                    <div class="when">
-                                        <div class="when-date">
-                                            <div class="date-day">@news.AddedDate.Date.ToString("dd")</div>
-                                            <div class="date-month">@news.AddedDate.Date.ToString("MMM")</div>
-                                            <div class="date-year" style="display:none;">
-                                                @news.AddedDate.Date.ToString("yyyy")
+                                                @if (ViewBag.NewDate > newDate)
+                                                {
+                                                    <div class="date-year">
+                                                        @news.AddedDate.Date.ToString("yyyy")
+                                                    </div>
+                                                }
+
                                             </div>
+                                            <div class="when-time">@news.AddedDate.ToString("HH:mm")</div>
                                         </div>
-                                        <div class="when-time">@news.AddedDate.ToString("HH:mm")</div>
-                                    </div>
 
 
-                                    <div class="p-t-16">
-                                        <h5 class="p-b-5 m-2">
-                                            <a asp-controller="news" asp-action="details" asp-route-id="@news.Id" class="f1-m-3 cl2 hov-cl10 trans-03">
-                                                @news.Title
-                                            </a>
-                                        </h5>
+                                        <div class="p-t-16">
+                                            <h5 class="p-b-5 m-2">
+                                                <a asp-controller="news" asp-action="details" asp-route-id="@news.Id" class="f1-m-3 cl2 hov-cl10 trans-03">
+                                                    @news.Title
+                                                </a>
+                                            </h5>
 
-                                        @{
-                                            var userId = _userManager.GetUserId(User);
+                                            @{
+                                                var userId = _userManager.GetUserId(User);
 
-                                            List<LikeAndDislike> LikeCount = _context.LikeAndDislikes.Where(aa => aa.NewsId == news.Id && aa.LikeAndDislikeStatus == LikeAndDislikeStatus.Like).ToList();
-                                            List<LikeAndDislike> DislikeCount = _context.LikeAndDislikes.Where(aa => aa.NewsId == news.Id && aa.LikeAndDislikeStatus == LikeAndDislikeStatus.Dislike).ToList();
-                                            List<LikeAndDislike> LikeIcon = _context.LikeAndDislikes.Where(aa => aa.NewsId == news.Id && aa.UserId == userId && aa.LikeAndDislikeStatus == LikeAndDislikeStatus.Like).ToList();
-                                            List<LikeAndDislike> DislikeIcon = _context.LikeAndDislikes.Where(aa => aa.NewsId == news.Id && aa.UserId == userId && aa.LikeAndDislikeStatus == LikeAndDislikeStatus.Dislike).ToList();
+                                                List<LikeAndDislike> LikeCount = _context.LikeAndDislikes.Where(aa => aa.NewsId == news.Id && aa.LikeAndDislikeStatus == LikeAndDislikeStatus.Like).ToList();
+                                                List<LikeAndDislike> DislikeCount = _context.LikeAndDislikes.Where(aa => aa.NewsId == news.Id && aa.LikeAndDislikeStatus == LikeAndDislikeStatus.Dislike).ToList();
+                                                List<LikeAndDislike> LikeIcon = _context.LikeAndDislikes.Where(aa => aa.NewsId == news.Id && aa.UserId == userId && aa.LikeAndDislikeStatus == LikeAndDislikeStatus.Like).ToList();
+                                                List<LikeAndDislike> DislikeIcon = _context.LikeAndDislikes.Where(aa => aa.NewsId == news.Id && aa.UserId == userId && aa.LikeAndDislikeStatus == LikeAndDislikeStatus.Dislike).ToList();
 
-                                            var Likecount = LikeCount.Count;
-                                            var Dislikecount = DislikeCount.Count;
+                                                var Likecount = LikeCount.Count;
+                                                var Dislikecount = DislikeCount.Count;
 
-                                            var aa = 0;
-                                            var bb = "";
-                                            var cc = "";
+                                                var aa = 0;
+                                                var bb = "";
+                                                var cc = "";
 
-                                            foreach (var likeicon in LikeIcon)
-                                            {
-                                                aa = (int)likeicon.LikeAndDislikeStatus;
-
-                                                if (aa == 1)
+                                                foreach (var likeicon in LikeIcon)
                                                 {
-                                                    bb = "like-added";
-                                                }
-                                                else
-                                                {
-                                                    bb = "";
+                                                    aa = (int)likeicon.LikeAndDislikeStatus;
+
+                                                    if (aa == 1)
+                                                    {
+                                                        bb = "like-added";
+                                                    }
+                                                    else
+                                                    {
+                                                        bb = "";
+                                                    }
+
                                                 }
 
+                                                foreach (var dislikeicon in DislikeIcon)
+                                                {
+                                                    aa = (int)dislikeicon.LikeAndDislikeStatus;
+
+                                                    if (aa == 2)
+                                                    {
+                                                        cc = "dislike-added";
+                                                    }
+                                                    else
+                                                    {
+                                                        cc = "";
+                                                    }
+                                                }
                                             }
 
-                                            foreach (var dislikeicon in DislikeIcon)
-                                            {
-                                                aa = (int)dislikeicon.LikeAndDislikeStatus;
+                                            <div class="stats">
+                                                <div class="stats-i-container stats-like-active stats_likes @(SignInManager.IsSignedIn(User) == true ? "news-like" : "like-hover")  @bb"
+                                                     data-id="@news.Id"
+                                                     data-likecount="@Likecount">
 
-                                                if (aa == 2)
-                                                {
-                                                    cc = "dislike-added";
-                                                }
-                                                else
-                                                {
-                                                    cc = "";
-                                                }
-                                            }
-                                        }
-
-                                        <div class="stats">
-                                            <div class="stats-i-container stats-like-active stats_likes @(SignInManager.IsSignedIn(User) == true ? "news-like" : "like-hover")  @bb"
-                                                 data-id="@news.Id"
-                                                 data-likecount="@Likecount">
-
-                                                <span class="stats-i">
-                                                    <i class="fas fa-thumbs-up likeCount">@Likecount</i>
-                                                </span>
-                                            </div>
-                                            <div class="stats-i-container stats-like-active stats_dislikes @(SignInManager.IsSignedIn(User) == true ? "news-dislike" : "dislike-hover") @cc"
-                                                 data-id="@news.Id"
-                                                 data-dislikecount="@Dislikecount">
-                                                <span class="stats-i"><i class="fas fa-thumbs-down dislikeCount"></i>@Dislikecount</span>
-                                            </div>
-                                            <div class="stats-i-container stats_views">
-                                                <span class="stats-i"><i class="fas fa-eye"></i> @news.ViewCount</span>
+                                                    <span class="stats-i">
+                                                        <i class="fas fa-thumbs-up likeCount">@Likecount</i>
+                                                    </span>
+                                                </div>
+                                                <div class="stats-i-container stats-like-active stats_dislikes @(SignInManager.IsSignedIn(User) == true ? "news-dislike" : "dislike-hover") @cc"
+                                                     data-id="@news.Id"
+                                                     data-dislikecount="@Dislikecount">
+                                                    <span class="stats-i"><i class="fas fa-thumbs-down dislikeCount"></i>@Dislikecount</span>
+                                                </div>
+                                                <div class="stats-i-container stats_views">
+                                                    <span class="stats-i"><i class="fas fa-eye"></i> @news.ViewCount</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                                            }
+                        }
+
+
+
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="flex-wr-s-c m-rl--7 p-t-15">
+                        @for (int i = 1; i <= ViewBag.PageCount; i++)
+                        {
+                            <a asp-controller="news" asp-action="index" asp-all-route-data="@ViewBag.Filter" asp-route-page="@i" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7 @(ViewBag.ActivePage == i ? "pagi-active" : "")">@i</a>
+                        }
+                    </div>
+
 
 
                 </div>
-
-                <!-- Pagination -->
-                <div class="flex-wr-s-c m-rl--7 p-t-15">
-                    @for (int i = 1; i <= ViewBag.PageCount; i++)
-                    {
-                        <a asp-controller="news" asp-action="index" asp-all-route-data="@ViewBag.Filter" asp-route-page="@i" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7 @(ViewBag.ActivePage == i ? "pagi-active" : "")">@i</a>
-                    }
-                </div>              
-
-
-
-            </div>
-                                            }
-                                            else
-                                            {
+            }
+            else
+            {
                 <div class="col-md-10 col-lg-8 p-b-80">
                     <div class="row">
                         <div class="how2 how2-cl4 flex-s-c">
@@ -271,7 +245,7 @@
                         </div>
                     </div>
                 </div>
-                                            }
+            }
 
 
             <div class="col-md-10 col-lg-4 p-b-80">
@@ -283,7 +257,8 @@
                         <div class="how2 how2-cl4 flex-s-c">
                             <h3 class="f1-m-2 cl3 tab01-title">
                                 @(ViewBag.categoryId==null?"Category":"")
-                                @foreach (var item in Model.Categories) { @(ViewBag.categoryId == item.Id ? item.Name :"");
+                                @foreach (var item in Model.Categories)
+                                {@(ViewBag.categoryId == item.Id ? item.Name :"");
                                 }
                             </h3>
                         </div>
@@ -390,3 +365,8 @@
         </div>
     </div>
 </section>
+
+
+
+
+

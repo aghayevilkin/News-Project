@@ -17,9 +17,14 @@
                         <a asp-controller="news" asp-action="details" asp-route-id="@item.Id" class="dis-block how1-child1 trans-03"></a>
 
                         <div class="flex-col-e-s s-full p-rl-25 p-tb-20">
-                            <a asp-controller="news" asp-action="index" asp-route-id="@item.Category.NewsCategory.Id" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
-                                @item.Category.NewsCategory.Name
-                            </a>
+                            <span class="how1-child2">
+                                <a asp-controller="news" asp-action="index" asp-route-id="@item.Category.NewsCategory.Id" class="f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2 mr-2">
+                                    @item.Category.NewsCategory.Name
+                                </a>
+                                <a asp-controller="news" asp-action="index" asp-route-id="@item.Category.NewsCategory.Id" asp-route-cateId="@item.Category.Id" class="f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
+                                    @item.Category.Name
+                                </a>
+                            </span>
 
                             <h3 class="how1-child2 m-t-14 m-b-10">
                                 <a asp-controller="news" asp-action="details" asp-route-id="@item.Id" class="how-txt1 size-a-6 f1-l-1 cl0 hov-cl10 trans-03">
@@ -55,9 +60,14 @@
                                 <a asp-controller="news" asp-action="details" asp-route-id="@item.Id" class="dis-block how1-child1 trans-03"></a>
 
                                 <div class="flex-col-e-s s-full p-rl-25 p-tb-24">
-                                    <a asp-controller="news" asp-action="index" asp-route-id="@item.Category.NewsCategory.Id" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
-                                        @item.Category.NewsCategory.Name
-                                    </a>
+                                    <span class="how1-child2">
+                                        <a asp-controller="news" asp-action="index" asp-route-id="@item.Category.NewsCategory.Id" class="f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2 mr-2">
+                                            @item.Category.NewsCategory.Name
+                                        </a>
+                                        <a asp-controller="news" asp-action="index" asp-route-id="@item.Category.NewsCategory.Id" asp-route-cateId="@item.Category.Id" class="f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
+                                            @item.Category.Name
+                                        </a>
+                                    </span>
 
                                     <h3 class="how1-child2 m-t-14">
                                         <a asp-controller="news" asp-action="details" asp-route-id="@item.Id" class="how-txt1 size-a-7 f1-l-2 cl0 hov-cl10 trans-03">
@@ -77,9 +87,14 @@
                                 <a asp-controller="news" asp-action="details" asp-route-id="@item.Id" class="dis-block how1-child1 trans-03"></a>
 
                                 <div class="flex-col-e-s s-full p-rl-25 p-tb-20">
-                                    <a asp-controller="news" asp-action="index" asp-route-id="@item.Category.NewsCategory.Id" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
-                                        @item.Category.NewsCategory.Name
-                                    </a>
+                                    <span class="how1-child2">
+                                        <a asp-controller="news" asp-action="index" asp-route-id="@item.Category.NewsCategory.Id" class="f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2 mr-2">
+                                            @item.Category.NewsCategory.Name
+                                        </a>
+                                        <a asp-controller="news" asp-action="index" asp-route-id="@item.Category.NewsCategory.Id" asp-route-cateId="@item.Category.Id" class="f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
+                                            @item.Category.Name
+                                        </a>
+                                    </span>
 
                                     <h3 class="how1-child2 m-t-14">
                                         <a asp-controller="news" asp-action="details" asp-route-id="@item.Id" class="how-txt1 size-h-1 f1-m-1 cl0 hov-cl10 trans-03">

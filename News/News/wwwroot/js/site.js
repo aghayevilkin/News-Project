@@ -1,4 +1,41 @@
-﻿$(document).ready(function () {
+﻿
+
+
+
+
+
+
+
+
+
+
+
+
+
+$(document).ready(function () {
+
+    //var likeCountJ = $("#likeCountJ").text();
+    //var dislikeCountJ = $("#dislikeCountJ").text();
+    //console.log(likeCountJ);
+    //console.log(dislikeCountJ);
+
+
+    //var url = '/News/GetNews'
+
+    //$.getJSON(url, function (data) {
+    //    var array = $.map(data, function (value, index) {
+    //        return value;
+    //    });
+
+
+    //    $.each(array, function (indis, value) {
+    //        var news = '<tbody><tr><td>' + Object.values(value)[0] + '</td><td>' + Object.values(value)[1] + '</td><td>' + Object.values(value)[2] + '</td><td>' + Object.values(value)[3] + '</td><td>' + Object.values(value)[4] + '</td></tr></tbody>';
+    //        var NewS = '<div class="col-sm-6 p-r-25 p-r-15-sr991"><div class="m-b-45"><a class="wrap-pic-w hov1 trans-03 news-clip-path" href="/news/details/' + Object.values(value)[0] + '"><img style="background-size: cover; background-position: center center; height: 225px; " src="/Uploads/Images/News/' + Object.values(value)[4] + '" alt="IMG"></a><div class="news-content"><span class="f1-s-3 cateBlog"><span class="dis-block how1-child2 f1-s-5 cl0 bo-all-1 trans-03 p-rl-5 p-t-2" style="color: #aaaaaa; border-color: #aaaaaa; ">' + Object.values(value)[2] + '</span><i class="fas added  fa-bookmark fa-2x blog-bookmarked" data-id="' + Object.values(value)[0] + '" aria-hidden="true"></i></span><div class="when"><div class="when-date"><div class="date-day">01</div><div class="date-month">Jan</div></div><div class="when-time">00:38</div></div><div class="p-t-16"><h5 class="p-b-5 m-2"><a class="f1-m-3 cl2 hov-cl10 trans-03" href="/news/details/' + Object.values(value)[0] + '">' + Object.values(value)[1] + '</a></h5><div class="stats"><div class="stats-i-container stats-like-active stats_likes news-like  like-added" data-id="' + Object.values(value)[0] + '" data-likecount="' + likeCountJ + '"><span class="stats-i"><i class="fas fa-thumbs-up likeCount" aria-hidden="true">' + likeCountJ + '</i></span></div><div class="stats-i-container stats-like-active stats_dislikes news-dislike " data-id="' + Object.values(value)[0] + '" data-dislikecount="' + dislikeCountJ + '"><span class="stats-i"><i class="fas fa-thumbs-down dislikeCount" aria-hidden="true"></i>' + dislikeCountJ + '</span></div><div class="stats-i-container stats_views"><span class="stats-i"><i class="fas fa-eye" aria-hidden="true"></i> ' + Object.values(value)[3] + '</span></div></div></div></div></div></div>';
+
+
+    //        $('#NewS').append(NewS);
+    //    });
+    //});
 
 
     $(".socialBTN").click(function () {
@@ -265,3 +302,10 @@ function readURLTwo(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+
+
+
+
+
+
+
