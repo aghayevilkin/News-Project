@@ -1019,5 +1019,58 @@ namespace News.Controllers
             return View();
         }
 
+
+
+
+
+
+        //Saved News
+        public IActionResult SavedNews()
+        {
+            string userId = _userManager.GetUserId(User);
+            CustomUser customUsers = _context.CustomUsers.Find(userId);
+            List<CustomUser> customUserS = _context.CustomUsers.Include(u => u.SocialToUsers).ThenInclude(sc => sc.Social).Where(aa => aa.SocialToUsers.Any(bb => bb.User.Id == userId)).ToList();
+
+            SavedNews savedNewsDate = _context.SavedNews.Where(u => u.UserId == userId).OrderByDescending(d => d.AddedDate).LastOrDefault();
+            if (savedNewsDate != null)
+            {
+                ViewBag.LastSavedPostDate = savedNewsDate.AddedDate;
+            }
+
+
+            VmProfile model = new VmProfile()
+            {
+                Posts = _context.News.Include(c => c.Category).ThenInclude(scs => scs.NewsCategory).Include(u => u.User).Include(tp => tp.TagToNews).ThenInclude(t => t.Tag).Where(p => p.UserId == userId).OrderByDescending(o => o.AddedDate).ToList(),
+                SavedNews = _context.SavedNews.Include(pp => pp.News).ThenInclude(cat => cat.Category).ThenInclude(scs => scs.NewsCategory).Include(u => u.User).Where(sa => sa.UserId == userId).OrderByDescending(o => o.AddedDate).ToList(),
+                Setting = _context.Settings.FirstOrDefault(),
+                Socials = _context.Socials.ToList(),
+                User = customUsers,
+                UserS = customUserS,
+            };
+            return View(model);
+        }
+
+        public IActionResult SavedNewsDelete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            SavedNews model = _context.SavedNews.FirstOrDefault(i => i.Id == id);
+            if (model == null)
+            {
+                return NotFound();
+            }
+
+            _context.SavedNews.Remove(model);
+            _context.SaveChanges();
+
+            Notify("Saved News Deleted");
+            return RedirectToAction("Savednews");
+        }
+
+
+
     }
 }

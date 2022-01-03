@@ -212,3 +212,4 @@ C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Views\Shared\
 C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Views\Account\Posts.cshtml.g.cs
 C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Views\Account\PostCreate.cshtml.g.cs
 C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Views\Account\AccessDenied.cshtml.g.cs
+C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Views\Account\SavedNews.cshtml.g.cs
