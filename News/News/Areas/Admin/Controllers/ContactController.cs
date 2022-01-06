@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using News.Controllers;
 using News.Data;
 using News.Models;
+using News.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,9 +31,37 @@ namespace News.Areas.Admin.Controllers
             _context = context;
             _hostingEnvironment = hostingEnvironment;
         }
+
         public IActionResult Index()
         {
-            return View();
+            VmBase model = new VmBase()
+            {
+                Messages = _context.Messages.OrderByDescending(a => a.AddedDate).ToList(),
+            };
+            return View(model);
+        }
+
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                Notify("You have not selected a message!", notificationType: NotificationType.warning);
+                return RedirectToAction("Index");
+            }
+
+            Message message = _context.Messages.FirstOrDefault(i => i.Id == id);
+            if (message == null)
+            {
+                Notify("Message not deleted!", notificationType: NotificationType.error);
+                return RedirectToAction("Index");
+            }
+
+
+            Notify("Message Deleted");
+            _context.Messages.Remove(message);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
 

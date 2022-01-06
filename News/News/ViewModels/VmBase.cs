@@ -15,6 +15,7 @@ namespace News.ViewModels
         public List<News.Models.News> News { get; set; }
         public List<News.Models.News> LatestArticles { get; set; }
         public List<NewsTag> Tags { get; set; }
+        public List<Message> Messages { get; set; }
         public List<LikeAndDislike> LikeAndDislikes { get; set; }
         public List<Subscribe> Subscribes { get; set; }
         public CustomUser CustomUser { get; set; }

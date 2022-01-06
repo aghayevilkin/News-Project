@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using News.Data;
 using News.Models;
+using News.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,10 +26,43 @@ namespace News.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            string userId = _userManager.GetUserId(User);
+
+            VmBase model = new VmBase()
+            {
+                Setting = _context.Settings.FirstOrDefault(),
+                Socials = _context.Socials.ToList(),
+                CustomUser = _context.CustomUsers.FirstOrDefault(u => u.Id == userId),
+            };
+
+            return View(model);
         }
 
 
+        public JsonResult addMessage(string email, string name, string subject, string content)
+        {
+            if (email == null && name == null && subject == null && content == null)
+            {
+                return Json(404);
+            }
+
+            Message message = new Message()
+            {
+                Email = email,
+                Name = name,
+                Subject = subject,
+                Content = content,
+                AddedDate = DateTime.Now
+            };
+
+            _context.Messages.Add(message);
+            _context.SaveChanges();
+
+
+
+
+            return Json(200);
+        }
 
         public JsonResult addSubscribe(string email)
         {
