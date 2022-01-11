@@ -17,6 +17,7 @@ namespace News.Data
 
         public DbSet<CustomUser> CustomUsers { get; set; }
         public DbSet<Social> Socials { get; set; }
+        public DbSet<About> Abouts { get; set; }
         public DbSet<SocialToUser> SocialToUsers { get; set; }
         public DbSet<News.Models.News> News { get; set; }
         public DbSet<NewsCategory> NewsCategories { get; set; }

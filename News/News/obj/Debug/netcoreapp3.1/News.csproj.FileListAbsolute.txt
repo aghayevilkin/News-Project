@@ -215,3 +215,7 @@ C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Views\Account
 C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Views\Account\SavedNews.cshtml.g.cs
 C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Views\Contact\Index.cshtml.g.cs
 C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Contact\Index.cshtml.g.cs
+C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Views\About\Index.cshtml.g.cs
+C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\About\Index.cshtml.g.cs
+C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\About\Create.cshtml.g.cs
+C:\Users\ASUS\source\repos\News\News\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\About\Update.cshtml.g.cs

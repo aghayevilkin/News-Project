@@ -20,6 +20,7 @@ namespace News.ViewModels
         public List<Subscribe> Subscribes { get; set; }
         public CustomUser CustomUser { get; set; }
         public Setting Setting { get; set; }
+        public About About { get; set; }
         public List<NewsCategory> Categories { get; set; }
 
 

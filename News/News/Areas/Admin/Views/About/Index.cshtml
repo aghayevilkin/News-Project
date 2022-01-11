@@ -1,0 +1,58 @@
+﻿@model About
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="content-wrapper">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title"></h4>
+            <div class="mr-2">
+                <h4 class="card-title">Abouts</h4>
+                <div class="d-flex table-responsive">
+                    <div class="mr-2">
+                        <a asp-controller="about" asp-action="create" class="btn btn-info"><i class="mdi mdi-plus-circle-outline"></i> Add</a>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                #
+                            </th>
+                            <th>
+                                Title
+                            </th>
+                            <th>
+                                Content
+                            </th>
+                            <th></th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            <tr>
+                                <td>1.</td>
+                                <td>@Model.Title</td>
+                                <td>@Html.Raw(Model.Content)</td>
+                                <td><a asp-area="admin" asp-controller="about" asp-action="update" asp-route-id="@Model.Id" class="btn btn-success">Update</a></td>
+                                <td><a onclick="return confirm('Are you sure?')" asp-area="admin" asp-controller="about" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a></td>
+                             </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td>About list is empty</td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
